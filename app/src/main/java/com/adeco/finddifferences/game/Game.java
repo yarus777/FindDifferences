@@ -34,8 +34,8 @@ public class Game implements Drawable, Touchable {
     public Game(Context context) {
         AssetManager assetManager = context.getAssets();
         levelStorage = new LevelStorage(assetManager);
-        difLayer = new DifferenceLayer();
         Level level = levelStorage.GetCurrentLevel();
+        difLayer = new DifferenceLayer(level.getDiffs());
         mPaint = new Paint();
 
         img1 = getBitmapFromAsset(assetManager, level.getImg1());
