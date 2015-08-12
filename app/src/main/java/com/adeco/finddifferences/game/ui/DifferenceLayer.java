@@ -48,9 +48,10 @@ public class DifferenceLayer implements Touchable, Drawable {
                         break;
                     }
                 }
+                if (!found) {
+                    wrongs.add(x, y);
+                }
         }
-        if (!found) {
-            wrongs.add(x, y);
-        }
+
     }
 }
