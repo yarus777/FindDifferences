@@ -14,11 +14,12 @@ import com.adeco.finddifferences.game.Touchable;
  */
 public class DifferenceLayer implements Touchable, Drawable {
     private DifferencePoint[] diffs;
-
+    private WrongTouches wrongs;
 
     public DifferenceLayer(DifferencePoint[] diffs, double scaleFactor) {
         this.diffs = new DifferencePoint[diffs.length];
-        for(int i=0; i<diffs.length; i++){
+        wrongs = new WrongTouches(30);
+        for (int i = 0; i < diffs.length; i++) {
             this.diffs[i] = diffs[i].scale(scaleFactor);
         }
         Paint mPaint = new Paint();
@@ -36,17 +37,19 @@ public class DifferenceLayer implements Touchable, Drawable {
     @Override
     public void onTouch(MotionEvent event) {
         boolean found = false;
+        int x = (int) event.getX();
+        int y = (int) event.getY();
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 for (DifferencePoint dif : diffs) {
-                    if(dif.Find((int) event.getX(), (int) event.getY())){
+                    if (dif.Find(x, y)) {
                         found = true;
                         break;
                     }
                 }
         }
-        if(!found){
-            // рисуй красный круг
+        if (!found) {
+            wrongs.add(x, y);
         }
     }
 }

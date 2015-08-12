@@ -22,6 +22,7 @@ public class DifferencePoint implements Drawable {
         mPaint = new Paint();
         mPaint.setColor(Color.GREEN);
         mPaint.setStyle(Paint.Style.STROKE);
+        mPaint.setStrokeWidth(2);
     }
 
     public boolean Find(int x, int y) {
