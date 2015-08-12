@@ -13,12 +13,17 @@ public class GameView extends View implements View.OnTouchListener {
 
     public GameView(Context context) {
         super(context);
-        game = new Game(context);
-        this.setOnTouchListener(this);
+        init(context);
     }
 
     public GameView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        init(context);
+    }
+
+    private void init(Context context) {
+        game = new Game(context);
+        this.setOnTouchListener(this);
     }
 
     @Override
