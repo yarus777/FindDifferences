@@ -35,11 +35,18 @@ public class DifferenceLayer implements Touchable, Drawable {
 
     @Override
     public void onTouch(MotionEvent event) {
+        boolean found = false;
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 for (DifferencePoint dif : diffs) {
-                    dif.Find((int) event.getX(), (int) event.getY());
+                    if(dif.Find((int) event.getX(), (int) event.getY())){
+                        found = true;
+                        break;
+                    }
                 }
+        }
+        if(!found){
+            // рисуй красный круг
         }
     }
 }
