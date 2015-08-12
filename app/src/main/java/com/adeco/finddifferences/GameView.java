@@ -23,28 +23,27 @@ public class GameView extends View  implements View.OnTouchListener {
     public GameView(Context context) {
 
         super(context);
-        game = new Game(context);
+      
+    }
 
-        //setFocusable(true);
+    public GameView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+		
+		game = new Game(context);
         this.setOnTouchListener(this);
 
         mPaint.setColor(Color.GREEN);
         mPaint.setStyle(Paint.Style.STROKE);
     }
 
-    public GameView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-    }
-
     @Override
     protected void onDraw(Canvas canvas) {
 
-        game.draw(canvas);
+        
 
-        /*if (scaledBitmap != null && scaledBitmap2 != null) {
-            canvas.drawBitmap(scaledBitmap, 0, 0, mPaint);
-            canvas.drawBitmap(scaledBitmap2, 0, scaledHeight, mPaint);
-        } */
+        if (game != null ) {
+           game.draw(canvas); 
+        } 
         for(Point p: points){
             canvas.drawCircle(p.x, p.y, 40, mPaint);
         }
