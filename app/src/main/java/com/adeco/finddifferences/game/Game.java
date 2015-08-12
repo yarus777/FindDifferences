@@ -7,10 +7,12 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.view.Display;
+import android.view.MotionEvent;
 import android.view.WindowManager;
 
 import com.adeco.finddifferences.game.levels.Level;
 import com.adeco.finddifferences.game.levels.LevelStorage;
+import com.adeco.finddifferences.game.ui.DifferenceLayer;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,8 +20,9 @@ import java.io.InputStream;
 /**
  * Created by agorbach on 12.08.2015.
  */
-public class Game {
+public class Game implements Drawable, Touchable {
     private LevelStorage levelStorage;
+    private DifferenceLayer difLayer;
 
     private Paint mPaint;
     private Bitmap scaledBitmap, scaledBitmap2, img1, img2;
@@ -31,6 +34,7 @@ public class Game {
     public Game(Context context) {
         AssetManager assetManager = context.getAssets();
         levelStorage = new LevelStorage(assetManager);
+        difLayer = new DifferenceLayer();
         Level level = levelStorage.GetCurrentLevel();
         mPaint = new Paint();
 
@@ -51,6 +55,7 @@ public class Game {
     public void draw(Canvas canvas) {
         canvas.drawBitmap(scaledBitmap, 0, 0, mPaint);
         canvas.drawBitmap(scaledBitmap2, 0, scaledHeight, mPaint);
+        difLayer.draw(canvas);
     }
 
     public static Bitmap getBitmapFromAsset(AssetManager mgr, String filePath) {
@@ -64,5 +69,10 @@ public class Game {
         }
 
         return bitmap;
+    }
+
+    @Override
+    public void onTouch(MotionEvent event) {
+        difLayer.onTouch(event);
     }
 }
