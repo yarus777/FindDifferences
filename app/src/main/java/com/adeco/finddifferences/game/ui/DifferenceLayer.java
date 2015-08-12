@@ -32,6 +32,7 @@ public class DifferenceLayer implements Touchable, Drawable {
         for (DifferencePoint dif : diffs) {
             dif.draw(canvas);
         }
+        wrongs.draw(canvas);
     }
 
     @Override
