@@ -16,8 +16,11 @@ public class DifferenceLayer implements Touchable, Drawable {
     private DifferencePoint[] diffs;
 
 
-    public DifferenceLayer(DifferencePoint[] diffs) {
-        this.diffs = diffs;
+    public DifferenceLayer(DifferencePoint[] diffs, double scaleFactor) {
+        this.diffs = new DifferencePoint[diffs.length];
+        for(int i=0; i<diffs.length; i++){
+            this.diffs[i] = diffs[i].scale(scaleFactor);
+        }
         Paint mPaint = new Paint();
         mPaint.setColor(Color.GREEN);
         mPaint.setStyle(Paint.Style.STROKE);

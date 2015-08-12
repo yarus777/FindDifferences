@@ -25,9 +25,8 @@ public class Game implements Drawable, Touchable {
     private DifferenceLayer difLayer;
 
     private Paint mPaint;
-    private Bitmap scaledBitmap, scaledBitmap2, img1, img2;
-    private int scrwidth;
-    private int scaledHeight;
+    private Bitmap img1;
+    private Bitmap img2;
     private int width;
     private int height;
 
@@ -35,26 +34,27 @@ public class Game implements Drawable, Touchable {
         AssetManager assetManager = context.getAssets();
         levelStorage = new LevelStorage(assetManager);
         Level level = levelStorage.GetCurrentLevel();
-        difLayer = new DifferenceLayer(level.getDiffs());
+
         mPaint = new Paint();
 
-        img1 = getBitmapFromAsset(assetManager, level.getImg1());
-        img2 = getBitmapFromAsset(assetManager, level.getImg2());
-        width = img1.getWidth();
-        height = img1.getHeight();
-
+        Bitmap img1raw = getBitmapFromAsset(assetManager, level.getImg1());
+        Bitmap img2raw = getBitmapFromAsset(assetManager, level.getImg2());
+        int imgWidth = img1raw.getWidth();
+        int imgHeight = img1raw.getHeight();
 
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
-        scrwidth = display.getWidth();
-        scaledHeight = scrwidth * height / width;
-        scaledBitmap = Bitmap.createScaledBitmap(img1, scrwidth, scaledHeight, false);
-        scaledBitmap2 = Bitmap.createScaledBitmap(img2, scrwidth, scaledHeight, false);
+        width = display.getWidth();
+        double scaleFactor = (double) width / imgWidth;
+        height = (int) (scaleFactor * imgHeight);
+        img1 = Bitmap.createScaledBitmap(img1raw, width, height, false);
+        img2 = Bitmap.createScaledBitmap(img2raw, width, height, false);
+        difLayer = new DifferenceLayer(level.getDiffs(), scaleFactor);
     }
 
     public void draw(Canvas canvas) {
-        canvas.drawBitmap(scaledBitmap, 0, 0, mPaint);
-        canvas.drawBitmap(scaledBitmap2, 0, scaledHeight, mPaint);
+        canvas.drawBitmap(img1, 0, 0, mPaint);
+        canvas.drawBitmap(img2, 0, height, mPaint);
         difLayer.draw(canvas);
     }
 

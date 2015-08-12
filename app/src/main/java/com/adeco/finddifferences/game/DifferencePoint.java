@@ -41,9 +41,16 @@ public class DifferencePoint implements Drawable {
 
     @Override
     public void draw(Canvas canvas) {
-        /*if (!isFound) {
+        if (!isFound) {
             return;
-        }*/
+        }
         canvas.drawCircle(x, y, radius, mPaint);
+    }
+
+    public DifferencePoint scale(double scaleFactor) {
+        x *= scaleFactor;
+        y *= scaleFactor;
+        radius *= scaleFactor;
+        return this;
     }
 }
