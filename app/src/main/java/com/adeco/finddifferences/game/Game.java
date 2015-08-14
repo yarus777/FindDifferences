@@ -5,14 +5,15 @@ import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Paint;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.WindowManager;
 
 import com.adeco.finddifferences.game.levels.Level;
 import com.adeco.finddifferences.game.levels.LevelStorage;
-import com.adeco.finddifferences.game.ui.DifferenceLayer;
+import com.adeco.finddifferences.game.logic.DifferenceLayer;
+import com.adeco.finddifferences.game.logic.PictureLayer;
+import com.adeco.finddifferences.game.statistics.StatisticHandler;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,18 +25,17 @@ public class Game implements Drawable, Touchable {
     private LevelStorage levelStorage;
     private DifferenceLayer difLayer;
 
-    private Paint mPaint;
     private Bitmap img1;
     private Bitmap img2;
-    private int width;
-    private int height;
 
-    public Game(Context context) {
+    private PictureLayer pictureLayer;
+    private StatisticHandler statisticHandler;
+
+    public Game(Context context, StatisticHandler handler) {
+        statisticHandler = handler;
         AssetManager assetManager = context.getAssets();
         levelStorage = new LevelStorage(assetManager);
         Level level = levelStorage.GetCurrentLevel();
-
-        mPaint = new Paint();
 
         Bitmap img1raw = getBitmapFromAsset(assetManager, level.getImg1());
         Bitmap img2raw = getBitmapFromAsset(assetManager, level.getImg2());
@@ -44,17 +44,18 @@ public class Game implements Drawable, Touchable {
 
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
-        width = display.getWidth();
+        int width = display.getWidth();
         double scaleFactor = (double) width / imgWidth;
-        height = (int) (scaleFactor * imgHeight);
+        int height = (int) (scaleFactor * imgHeight);
         img1 = Bitmap.createScaledBitmap(img1raw, width, height, false);
         img2 = Bitmap.createScaledBitmap(img2raw, width, height, false);
+
         difLayer = new DifferenceLayer(level.getDiffs(), scaleFactor);
+        pictureLayer = new PictureLayer(img1, img2, difLayer);
     }
 
     public void draw(Canvas canvas) {
-        canvas.drawBitmap(img1, 0, 0, mPaint);
-        canvas.drawBitmap(img2, 0, height, mPaint);
+        pictureLayer.draw(canvas);
         difLayer.draw(canvas);
     }
 
@@ -73,6 +74,6 @@ public class Game implements Drawable, Touchable {
 
     @Override
     public void onTouch(MotionEvent event) {
-        difLayer.onTouch(event);
+        pictureLayer.onTouch(event);
     }
 }

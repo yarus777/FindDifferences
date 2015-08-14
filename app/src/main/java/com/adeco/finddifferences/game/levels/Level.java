@@ -1,6 +1,6 @@
 package com.adeco.finddifferences.game.levels;
 
-import com.adeco.finddifferences.game.DifferencePoint;
+import com.adeco.finddifferences.game.logic.points.DifferencePoint;
 
 /**
  * Created by agorbach on 12.08.2015.

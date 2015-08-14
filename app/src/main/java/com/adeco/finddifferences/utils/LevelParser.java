@@ -2,8 +2,8 @@ package com.adeco.finddifferences.utils;
 
 import android.content.res.AssetManager;
 
-import com.adeco.finddifferences.game.DifferencePoint;
 import com.adeco.finddifferences.game.levels.Level;
+import com.adeco.finddifferences.game.logic.points.DifferencePoint;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
