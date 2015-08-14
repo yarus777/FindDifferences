@@ -2,13 +2,12 @@ package com.adeco.finddifferences.game.logic.points;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
-
-import com.adeco.finddifferences.game.Drawable;
+import android.graphics.Point;
 
 /**
  * Created by agorbach on 14.08.2015.
  */
-public abstract class AbstractPoint implements Drawable {
+public abstract class AbstractPoint {
     private int x;
     private int y;
     private int radius;
@@ -21,16 +20,8 @@ public abstract class AbstractPoint implements Drawable {
         this.paint = paint;
     }
 
-    @Override
-    public void draw(Canvas canvas) {
-        canvas.drawCircle(x, y, radius, paint);
-    }
-
-    public AbstractPoint scale(double scaleFactor) {
-        x *= scaleFactor;
-        y *= scaleFactor;
-        radius *= scaleFactor;
-        return this;
+    public void draw(Canvas canvas, Point offset) {
+        canvas.drawCircle(x + offset.x, y + offset.y, radius, paint);
     }
 
     public boolean match(DifferencePoint point) {

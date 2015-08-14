@@ -11,9 +11,8 @@ import android.view.WindowManager;
 
 import com.adeco.finddifferences.game.levels.Level;
 import com.adeco.finddifferences.game.levels.LevelStorage;
-import com.adeco.finddifferences.game.logic.DifferenceLayer;
 import com.adeco.finddifferences.game.logic.PictureLayer;
-import com.adeco.finddifferences.game.statistics.StatisticHandler;
+import com.adeco.finddifferences.game.logic.points.DifferencePoint;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,16 +22,13 @@ import java.io.InputStream;
  */
 public class Game implements Drawable, Touchable {
     private LevelStorage levelStorage;
-    private DifferenceLayer difLayer;
 
     private Bitmap img1;
     private Bitmap img2;
 
     private PictureLayer pictureLayer;
-    private StatisticHandler statisticHandler;
 
-    public Game(Context context, StatisticHandler handler) {
-        statisticHandler = handler;
+    public Game(Context context) {
         AssetManager assetManager = context.getAssets();
         levelStorage = new LevelStorage(assetManager);
         Level level = levelStorage.GetCurrentLevel();
@@ -50,13 +46,17 @@ public class Game implements Drawable, Touchable {
         img1 = Bitmap.createScaledBitmap(img1raw, width, height, false);
         img2 = Bitmap.createScaledBitmap(img2raw, width, height, false);
 
-        difLayer = new DifferenceLayer(level.getDiffs(), scaleFactor);
-        pictureLayer = new PictureLayer(img1, img2, difLayer);
+        DifferencePoint[] diffs = level.getDiffs();
+        DifferencePoint[] scaledDiffs = new DifferencePoint[diffs.length];
+        for (int i = 0; i < diffs.length; i++) {
+            scaledDiffs[i] = diffs[i].scale(scaleFactor);
+        }
+        pictureLayer = new PictureLayer(img1, img2, scaledDiffs);
     }
 
     public void draw(Canvas canvas) {
         pictureLayer.draw(canvas);
-        difLayer.draw(canvas);
+        //difLayer.draw(canvas);
     }
 
     public static Bitmap getBitmapFromAsset(AssetManager mgr, String filePath) {

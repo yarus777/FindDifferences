@@ -8,32 +8,28 @@ import android.view.MotionEvent;
 
 import com.adeco.finddifferences.game.Drawable;
 import com.adeco.finddifferences.game.Touchable;
+import com.adeco.finddifferences.game.logic.points.DifferencePoint;
 
 /**
  * Created by agorbach on 14.08.2015.
  */
 public class PictureLayer implements Drawable, Touchable {
-    private HalfPicture top;
-    private HalfPicture bottom;
+    private TouchManager touchManager;
 
-    public PictureLayer(Bitmap img1, Bitmap img2, DifferenceLayer difLayer) {
+    public PictureLayer(Bitmap img1, Bitmap img2, DifferencePoint[] diffs) {
         Paint paint = new Paint();
-        this.top = new HalfPicture(new Point(0, 0), img1, difLayer, paint);
-        this.bottom = new HalfPicture(new Point(0, img1.getHeight()), img2, difLayer, paint);
+        TouchHandler top = new HalfPicture(new Point(0, 0), img1, paint);
+        TouchHandler bottom = new HalfPicture(new Point(0, img1.getHeight()), img2, paint);
+        touchManager = new TouchManager(diffs, top, bottom);
     }
 
     @Override
     public void draw(Canvas canvas) {
-        top.draw(canvas);
-        bottom.draw(canvas);
+        touchManager.draw(canvas);
     }
 
     @Override
     public void onTouch(MotionEvent event) {
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                top.onTouch(event);
-                bottom.onTouch(event);
-        }
+        touchManager.onTouch(event);
     }
 }

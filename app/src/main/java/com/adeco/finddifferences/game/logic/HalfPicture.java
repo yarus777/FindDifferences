@@ -4,41 +4,44 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
-import android.view.MotionEvent;
 
-import com.adeco.finddifferences.game.Drawable;
-import com.adeco.finddifferences.game.Touchable;
+import com.adeco.finddifferences.game.logic.points.AbstractPoint;
+import com.adeco.finddifferences.game.logic.points.DifferencePoint;
+import com.adeco.finddifferences.game.logic.points.RightPoint;
+
+import java.util.List;
 
 /**
  * Created by agorbach on 14.08.2015.
  */
-public class HalfPicture implements Drawable, Touchable {
+public class HalfPicture implements TouchHandler {
     private Point startPoint;
     private Bitmap back;
-    private DifferenceLayer difLayer;
     private Paint paint;
 
-    public HalfPicture(Point startPoint, Bitmap back, DifferenceLayer difLayer, Paint paint) {
+    public HalfPicture(Point startPoint, Bitmap back, Paint paint) {
         this.startPoint = startPoint;
         this.back = back;
         this.paint = paint;
-        this.difLayer = difLayer;
     }
 
     @Override
-    public void draw(Canvas canvas) {
+    public void draw(Canvas canvas, List<AbstractPoint> diffs) {
         canvas.drawBitmap(back, startPoint.x, startPoint.y, paint);
+        for (AbstractPoint point : diffs) {
+            point.draw(canvas, startPoint);
+        }
     }
 
     @Override
-    public void onTouch(MotionEvent event) {
-        int x = (int) event.getX() - startPoint.x;
-        int y = (int) event.getY() - startPoint.y;
-        difLayer.touch(x, y);
-    }
-
-    public boolean touched(int x, int y) {
-        return x >= startPoint.x && x <= startPoint.x + back.getWidth() &&
-                y >= startPoint.y && y <= startPoint.y + back.getHeight();
+    public AbstractPoint getDifference(DifferencePoint[] points, int realX, int realY) {
+        int x = realX - startPoint.x;
+        int y = realY - startPoint.y;
+        for (DifferencePoint point : points) {
+            if (point.Check(x, y)) {
+                return new RightPoint(point);
+            }
+        }
+        return null;
     }
 }

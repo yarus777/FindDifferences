@@ -1,23 +1,17 @@
 package com.adeco.finddifferences.game.logic;
 
-import android.view.MotionEvent;
+import android.graphics.Canvas;
 
-import com.adeco.finddifferences.game.Touchable;
+import com.adeco.finddifferences.game.logic.points.AbstractPoint;
+import com.adeco.finddifferences.game.logic.points.DifferencePoint;
+
+import java.util.List;
 
 /**
  * Created by agorbach on 14.08.2015.
  */
-public class TouchHandler implements Touchable {
-    private HalfPicture top;
-    private HalfPicture bottom;
+public interface TouchHandler {
+    AbstractPoint getDifference(DifferencePoint[] points, int x, int y);
 
-    public TouchHandler(HalfPicture top, HalfPicture bottom) {
-        this.top = top;
-        this.bottom = bottom;
-    }
-
-    @Override
-    public void onTouch(MotionEvent event) {
-
-    }
+    void draw(Canvas canvas, List<AbstractPoint> diffs);
 }
