@@ -13,9 +13,6 @@ import org.w3c.dom.NodeList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-/**
- * Created by agorbach on 12.08.2015.
- */
 public class LevelParser {
     private final static String XML_FOLDER = "xml/";
 

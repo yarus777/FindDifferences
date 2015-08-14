@@ -5,8 +5,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
+import android.widget.TextView;
 
 public class GameActivity extends Activity {
+
+    private TextView tries, right_touches;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -14,6 +17,9 @@ public class GameActivity extends Activity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_game);
         //setContentView(new GameView(this));
+        tries = (TextView) findViewById(R.id.touches);
+        right_touches = (TextView) findViewById(R.id.right_touches);
+
     }
 
     @Override

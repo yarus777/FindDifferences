@@ -3,9 +3,7 @@ package com.adeco.finddifferences.game;
 import android.graphics.Color;
 import android.graphics.Paint;
 
-/**
- * Created by agorbach on 14.08.2015.
- */
+
 public class Consts {
     public final static Paint difPaint;
     public final static Paint wrongPaint;

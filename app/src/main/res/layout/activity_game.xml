@@ -16,16 +16,20 @@
             android:layout_height="36dp">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="New Text"
-                android:id="@+id/textView" />
+                android:text="0/5"
+                android:id="@+id/right_touches"
+                android:layout_weight="1"
+                android:gravity="left" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="New Text"
-                android:id="@+id/textView2" />
+                android:text="0/10"
+                android:id="@+id/touches"
+                android:gravity="right"
+                android:layout_weight="1" />
         </LinearLayout>
 
         <com.adeco.finddifferences.GameView

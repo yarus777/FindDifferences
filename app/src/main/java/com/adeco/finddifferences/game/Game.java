@@ -17,9 +17,6 @@ import com.adeco.finddifferences.game.logic.points.DifferencePoint;
 import java.io.IOException;
 import java.io.InputStream;
 
-/**
- * Created by agorbach on 12.08.2015.
- */
 public class Game implements Drawable, Touchable {
     private LevelStorage levelStorage;
 

@@ -4,9 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
 
-/**
- * Created by agorbach on 14.08.2015.
- */
+
 public abstract class AbstractPoint {
     private int x;
     private int y;

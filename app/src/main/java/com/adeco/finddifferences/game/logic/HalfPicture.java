@@ -11,9 +11,7 @@ import com.adeco.finddifferences.game.logic.points.RightPoint;
 
 import java.util.List;
 
-/**
- * Created by agorbach on 14.08.2015.
- */
+
 public class HalfPicture implements TouchHandler {
     private Point startPoint;
     private Bitmap back;

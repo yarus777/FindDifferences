@@ -11,9 +11,7 @@ import com.adeco.finddifferences.game.logic.points.DifferencePoint;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by agorbach on 14.08.2015.
- */
+
 public class TouchManager implements Touchable, Drawable {
     private TouchHandler top;
     private TouchHandler bottom;

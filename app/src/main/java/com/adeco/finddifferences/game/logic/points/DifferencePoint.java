@@ -1,8 +1,6 @@
 package com.adeco.finddifferences.game.logic.points;
 
-/**
- * Created by agorbach on 12.08.2015.
- */
+
 public class DifferencePoint {
     private int x;
     private int y;

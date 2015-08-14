@@ -4,9 +4,7 @@ import android.content.res.AssetManager;
 
 import com.adeco.finddifferences.utils.LevelParser;
 
-/**
- * Created by agorbach on 12.08.2015.
- */
+
 public class LevelStorage {
     private final static String DATA_FILE = "levels.xml";
     private Level[] levels;
