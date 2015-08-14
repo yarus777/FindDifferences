@@ -28,8 +28,9 @@ public class DifferencePoint implements Drawable {
     public boolean Find(int x, int y) {
         if (GetDistance(x, y, this.x, this.y) <= radius) {
             isFound = true;
+            return true;
         }
-        return isFound;
+        return false;
     }
 
     private static double GetDistance(int x, int y, int x1, int y1) {
