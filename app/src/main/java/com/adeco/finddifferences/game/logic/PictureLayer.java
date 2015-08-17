@@ -9,6 +9,7 @@ import android.view.MotionEvent;
 import com.adeco.finddifferences.game.Drawable;
 import com.adeco.finddifferences.game.Touchable;
 import com.adeco.finddifferences.game.logic.points.DifferencePoint;
+import com.adeco.finddifferences.game.statistics.StatisticHandler;
 
 /**
  * Created by agorbach on 14.08.2015.
@@ -16,11 +17,11 @@ import com.adeco.finddifferences.game.logic.points.DifferencePoint;
 public class PictureLayer implements Drawable, Touchable {
     private TouchManager touchManager;
 
-    public PictureLayer(Bitmap img1, Bitmap img2, DifferencePoint[] diffs) {
+    public PictureLayer(Bitmap img1, Bitmap img2, DifferencePoint[] diffs, StatisticHandler statisticHandler) {
         Paint paint = new Paint();
         TouchHandler top = new HalfPicture(new Point(0, 0), img1, paint);
         TouchHandler bottom = new HalfPicture(new Point(0, img1.getHeight()), img2, paint);
-        touchManager = new TouchManager(diffs, top, bottom);
+        touchManager = new TouchManager(diffs, top, bottom, statisticHandler);
     }
 
     @Override

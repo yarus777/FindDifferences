@@ -13,6 +13,7 @@ import com.adeco.finddifferences.game.levels.Level;
 import com.adeco.finddifferences.game.levels.LevelStorage;
 import com.adeco.finddifferences.game.logic.PictureLayer;
 import com.adeco.finddifferences.game.logic.points.DifferencePoint;
+import com.adeco.finddifferences.game.statistics.StatisticHandler;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,7 +29,7 @@ public class Game implements Drawable, Touchable {
 
     private PictureLayer pictureLayer;
 
-    public Game(Context context) {
+    public Game(Context context, StatisticHandler statisticHandler) {
         AssetManager assetManager = context.getAssets();
         levelStorage = new LevelStorage(assetManager);
         Level level = levelStorage.GetCurrentLevel();
@@ -51,12 +52,11 @@ public class Game implements Drawable, Touchable {
         for (int i = 0; i < diffs.length; i++) {
             scaledDiffs[i] = diffs[i].scale(scaleFactor);
         }
-        pictureLayer = new PictureLayer(img1, img2, scaledDiffs);
+        pictureLayer = new PictureLayer(img1, img2, scaledDiffs, statisticHandler);
     }
 
     public void draw(Canvas canvas) {
         pictureLayer.draw(canvas);
-        //difLayer.draw(canvas);
     }
 
     public static Bitmap getBitmapFromAsset(AssetManager mgr, String filePath) {

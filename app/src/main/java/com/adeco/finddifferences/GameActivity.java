@@ -6,35 +6,39 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 
-public class GameActivity extends Activity {
+import com.adeco.finddifferences.game.statistics.StatisticData;
+import com.adeco.finddifferences.game.statistics.StatisticHandler;
+
+public class GameActivity extends Activity implements StatisticHandler {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_game);
-        //setContentView(new GameView(this));
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_game, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void handleStatistics(StatisticData data) {
+        int diffs = data.getDifferencesFound();
+        int moves = data.getMovesTaken();
+        // здесь вывод в текст-вью чего хочешь из data
     }
 }
