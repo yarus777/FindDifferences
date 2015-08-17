@@ -8,6 +8,7 @@ import android.view.View;
 
 import com.adeco.finddifferences.game.DifferenceFoundHandler;
 import com.adeco.finddifferences.game.Game;
+import com.adeco.finddifferences.game.popups.Popups;
 import com.adeco.finddifferences.game.statistics.StatisticHandler;
 
 public class GameView extends View implements View.OnTouchListener {
@@ -40,7 +41,7 @@ public class GameView extends View implements View.OnTouchListener {
         return true;
     }
 
-    public void setHandler(StatisticHandler statisticHandler, DifferenceFoundHandler differenceFoundHandler) {
-        game = new Game(context, statisticHandler, differenceFoundHandler);
+    public void setHandler(StatisticHandler statisticHandler, DifferenceFoundHandler differenceFoundHandler, Popups losePopup) {
+        game = new Game(context, statisticHandler, differenceFoundHandler, losePopup);
     }
 }

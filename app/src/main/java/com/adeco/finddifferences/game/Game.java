@@ -13,6 +13,7 @@ import com.adeco.finddifferences.game.levels.Level;
 import com.adeco.finddifferences.game.levels.LevelStorage;
 import com.adeco.finddifferences.game.logic.PictureLayer;
 import com.adeco.finddifferences.game.logic.points.DifferencePoint;
+import com.adeco.finddifferences.game.popups.Popups;
 import com.adeco.finddifferences.game.states.StateController;
 import com.adeco.finddifferences.game.statistics.StatisticHandler;
 
@@ -28,7 +29,7 @@ public class Game implements Drawable, Touchable {
     private PictureLayer pictureLayer;
     private StateController stateController;
 
-    public Game(Context context, StatisticHandler statisticHandler, DifferenceFoundHandler differenceFoundHandler) {
+    public Game(Context context, StatisticHandler statisticHandler, DifferenceFoundHandler differenceFoundHandler, Popups losePopup) {
         AssetManager assetManager = context.getAssets();
         levelStorage = new LevelStorage(assetManager);
         Level level = levelStorage.GetCurrentLevel();

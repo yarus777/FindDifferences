@@ -12,6 +12,7 @@ import android.view.Window;
 import android.widget.TextView;
 
 import com.adeco.finddifferences.game.DifferenceFoundHandler;
+import com.adeco.finddifferences.game.popups.Popups;
 import com.adeco.finddifferences.game.statistics.StatisticData;
 import com.adeco.finddifferences.game.statistics.StatisticHandler;
 
@@ -22,6 +23,7 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
 
     private GameView gameView;
     private boolean vibroState;
+    private Popups losePopup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +36,10 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
         Intent intent = getIntent();
         vibroState = intent.getExtras().getBoolean("vibroState");
 
+        losePopup = new Popups();
+
         gameView = (GameView) findViewById(R.id.canvas);
-        gameView.setHandler(this, this);
+        gameView.setHandler(this, this, losePopup);
     }
 
     @Override
