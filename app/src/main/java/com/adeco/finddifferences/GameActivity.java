@@ -12,7 +12,10 @@ import com.adeco.finddifferences.game.statistics.StatisticHandler;
 
 public class GameActivity extends Activity implements StatisticHandler {
 
-    private TextView tries, right_touches;
+    private TextView tries;
+    private TextView right_touches;
+
+    private GameView gameView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +24,8 @@ public class GameActivity extends Activity implements StatisticHandler {
         setContentView(R.layout.activity_game);
         tries = (TextView) findViewById(R.id.touches);
         right_touches = (TextView) findViewById(R.id.right_touches);
+        gameView = (GameView) findViewById(R.id.canvas);
+        gameView.setHandler(this);
     }
 
     @Override
@@ -42,8 +47,11 @@ public class GameActivity extends Activity implements StatisticHandler {
 
     @Override
     public void handleStatistics(StatisticData data) {
-        int diffs = data.getDifferencesFound();
-        int moves = data.getMovesTaken();
-        // здесь вывод в текст-вью чего хочешь из data
+        String diffs = String.valueOf(data.getDifferencesFound());
+        String moves = String.valueOf(data.getMovesTaken());
+
+        // здесь вывод в текст-вью чего хочешь из data, например
+        right_touches.setText(diffs);
+        tries.setText(moves);
     }
 }

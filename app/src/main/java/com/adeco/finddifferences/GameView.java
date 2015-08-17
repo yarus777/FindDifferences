@@ -7,9 +7,11 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.adeco.finddifferences.game.Game;
+import com.adeco.finddifferences.game.statistics.StatisticHandler;
 
 public class GameView extends View implements View.OnTouchListener {
     private Game game;
+    private Context context;
 
     public GameView(Context context) {
         super(context);
@@ -22,7 +24,7 @@ public class GameView extends View implements View.OnTouchListener {
     }
 
     private void init(Context context) {
-        game = new Game(context);
+        this.context = context;
         this.setOnTouchListener(this);
     }
 
@@ -35,5 +37,9 @@ public class GameView extends View implements View.OnTouchListener {
         game.onTouch(event);
         invalidate();
         return true;
+    }
+
+    public void setHandler(StatisticHandler statisticHandler) {
+        game = new Game(context, statisticHandler);
     }
 }
