@@ -11,9 +11,7 @@ import com.adeco.finddifferences.game.Touchable;
 import com.adeco.finddifferences.game.logic.points.DifferencePoint;
 import com.adeco.finddifferences.game.statistics.StatisticHandler;
 
-/**
- * Created by agorbach on 14.08.2015.
- */
+
 public class PictureLayer implements Drawable, Touchable {
     private TouchManager touchManager;
 
