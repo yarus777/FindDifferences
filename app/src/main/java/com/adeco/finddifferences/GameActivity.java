@@ -1,21 +1,25 @@
 package com.adeco.finddifferences;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.widget.TextView;
 
+import com.adeco.finddifferences.game.DifferenceFoundHandler;
 import com.adeco.finddifferences.game.statistics.StatisticData;
 import com.adeco.finddifferences.game.statistics.StatisticHandler;
 
-public class GameActivity extends Activity implements StatisticHandler {
+public class GameActivity extends Activity implements StatisticHandler, DifferenceFoundHandler {
 
     private TextView tries;
     private TextView right_touches;
 
     private GameView gameView;
+    private boolean vibroState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +28,12 @@ public class GameActivity extends Activity implements StatisticHandler {
         setContentView(R.layout.activity_game);
         tries = (TextView) findViewById(R.id.touches);
         right_touches = (TextView) findViewById(R.id.right_touches);
+
+        Intent intent = getIntent();
+        vibroState = intent.getExtras().getBoolean("vibroState");
+
         gameView = (GameView) findViewById(R.id.canvas);
-        gameView.setHandler(this);
+        gameView.setHandler(this, this);
     }
 
     @Override
@@ -50,8 +58,14 @@ public class GameActivity extends Activity implements StatisticHandler {
         String diffs = String.valueOf(data.getDifferencesFound());
         String moves = String.valueOf(data.getMovesTaken());
 
-        // здесь вывод в текст-вью чего хочешь из data, например
         right_touches.setText(diffs);
         tries.setText(moves);
+    }
+
+    @Override
+    public void onDifferenceFound() {
+        if (vibroState) {
+            Log.d("MYTAG", String.valueOf(vibroState));
+        }
     }
 }

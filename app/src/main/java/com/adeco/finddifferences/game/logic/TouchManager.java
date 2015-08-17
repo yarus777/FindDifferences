@@ -3,6 +3,7 @@ package com.adeco.finddifferences.game.logic;
 import android.graphics.Canvas;
 import android.view.MotionEvent;
 
+import com.adeco.finddifferences.game.DifferenceFoundHandler;
 import com.adeco.finddifferences.game.Drawable;
 import com.adeco.finddifferences.game.Touchable;
 import com.adeco.finddifferences.game.logic.points.AbstractPoint;
@@ -22,14 +23,17 @@ public class TouchManager implements Touchable, Drawable {
     private List<AbstractPoint> diffs;
     private StatisticHandler[] statisticHandlers;
     private StatisticData statistics;
+    private DifferenceFoundHandler[] differenceFoundHandlers;
 
-    public TouchManager(DifferencePoint[] points, TouchHandler top, TouchHandler bottom, StatisticHandler[] statisticHandler) {
+    public TouchManager(DifferencePoint[] points, TouchHandler top, TouchHandler bottom, StatisticHandler[] statisticHandler, DifferenceFoundHandler[] differenceFoundHandlers) {
         this.top = top;
         this.bottom = bottom;
         diffs = new ArrayList<>();
         this.points = points;
         this.statisticHandlers = statisticHandler;
+        this.differenceFoundHandlers = differenceFoundHandlers;
         statistics = new StatisticData();
+
     }
 
     @Override
@@ -45,11 +49,15 @@ public class TouchManager implements Touchable, Drawable {
                 if (touch != null) {
                     diffs.add(touch);
                     statistics.onDifferenceFound();
+                    for(DifferenceFoundHandler handler: differenceFoundHandlers)
+                        handler.onDifferenceFound();
+
                 }
                 statistics.onMove();
                 for (StatisticHandler handler : statisticHandlers) {
                     handler.handleStatistics(statistics);
                 }
+
         }
     }
 

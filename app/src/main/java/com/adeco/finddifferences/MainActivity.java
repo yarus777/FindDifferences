@@ -8,10 +8,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.view.View.OnClickListener;
+import android.widget.CheckBox;
+
+import java.util.zip.CheckedInputStream;
 
 public class MainActivity extends Activity {
 
     Button startGameBtn;
+    CheckBox vibroCheck;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,16 +23,20 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         startGameBtn =  (Button) findViewById(R.id.startGame);
+        vibroCheck = (CheckBox) findViewById(R.id.vibro);
 
         OnClickListener onClickStartBtn = new OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, GameActivity.class);
+                intent.putExtra("vibroState", vibroCheck.isChecked());
                 startActivity(intent);
             }
         };
 
         startGameBtn.setOnClickListener(onClickStartBtn);
+
+
 
     }
 

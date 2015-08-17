@@ -28,7 +28,7 @@ public class Game implements Drawable, Touchable {
     private PictureLayer pictureLayer;
     private StateController stateController;
 
-    public Game(Context context, StatisticHandler statisticHandler) {
+    public Game(Context context, StatisticHandler statisticHandler, DifferenceFoundHandler differenceFoundHandler) {
         AssetManager assetManager = context.getAssets();
         levelStorage = new LevelStorage(assetManager);
         Level level = levelStorage.GetCurrentLevel();
@@ -51,7 +51,7 @@ public class Game implements Drawable, Touchable {
         for (int i = 0; i < diffs.length; i++) {
             scaledDiffs[i] = diffs[i].scale(scaleFactor);
         }
-        pictureLayer = new PictureLayer(img1, img2, scaledDiffs, new StatisticHandler[]{statisticHandler, stateController});
+        pictureLayer = new PictureLayer(img1, img2, scaledDiffs, new StatisticHandler[]{statisticHandler, stateController}, new DifferenceFoundHandler[]{});
     }
 
     public void draw(Canvas canvas) {
