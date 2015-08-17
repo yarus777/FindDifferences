@@ -60,8 +60,8 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
         String diffs = String.valueOf(data.getDifferencesFound());
         String moves = String.valueOf(data.getMovesTaken());
 
-        right_touches.setText(diffs);
-        tries.setText(moves);
+        right_touches.setText(diffs+"/5");
+        tries.setText(moves+"/10");
     }
 
     @Override
