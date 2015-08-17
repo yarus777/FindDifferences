@@ -1,8 +1,10 @@
 package com.adeco.finddifferences;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -65,7 +67,8 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
     @Override
     public void onDifferenceFound() {
         if (vibroState) {
-            Log.d("MYTAG", String.valueOf(vibroState));
+            Vibrator v = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
+            v.vibrate(500);
         }
     }
 }
