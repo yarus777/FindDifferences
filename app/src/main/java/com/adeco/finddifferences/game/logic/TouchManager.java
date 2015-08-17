@@ -20,15 +20,15 @@ public class TouchManager implements Touchable, Drawable {
     private DifferencePoint[] points;
 
     private List<AbstractPoint> diffs;
-    private StatisticHandler statisticHandler;
+    private StatisticHandler[] statisticHandlers;
     private StatisticData statistics;
 
-    public TouchManager(DifferencePoint[] points, TouchHandler top, TouchHandler bottom, StatisticHandler statisticHandler) {
+    public TouchManager(DifferencePoint[] points, TouchHandler top, TouchHandler bottom, StatisticHandler[] statisticHandler) {
         this.top = top;
         this.bottom = bottom;
         diffs = new ArrayList<>();
         this.points = points;
-        this.statisticHandler = statisticHandler;
+        this.statisticHandlers = statisticHandler;
         statistics = new StatisticData();
     }
 
@@ -47,7 +47,9 @@ public class TouchManager implements Touchable, Drawable {
                     statistics.onDifferenceFound();
                 }
                 statistics.onMove();
-                statisticHandler.handleStatistics(statistics);
+                for (StatisticHandler handler : statisticHandlers) {
+                    handler.handleStatistics(statistics);
+                }
         }
     }
 

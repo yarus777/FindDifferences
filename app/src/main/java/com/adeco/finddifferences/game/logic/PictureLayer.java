@@ -15,11 +15,11 @@ import com.adeco.finddifferences.game.statistics.StatisticHandler;
 public class PictureLayer implements Drawable, Touchable {
     private TouchManager touchManager;
 
-    public PictureLayer(Bitmap img1, Bitmap img2, DifferencePoint[] diffs, StatisticHandler statisticHandler) {
+    public PictureLayer(Bitmap img1, Bitmap img2, DifferencePoint[] diffs, StatisticHandler[] statisticHandlers) {
         Paint paint = new Paint();
         TouchHandler top = new HalfPicture(new Point(0, 0), img1, paint);
         TouchHandler bottom = new HalfPicture(new Point(0, img1.getHeight()), img2, paint);
-        touchManager = new TouchManager(diffs, top, bottom, statisticHandler);
+        touchManager = new TouchManager(diffs, top, bottom, statisticHandlers);
     }
 
     @Override
