@@ -21,7 +21,9 @@
         android:id="@+id/resumeGame"
         android:layout_alignTop="@+id/startGame"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="66dp" />
+        android:layout_marginTop="66dp"
+        android:clickable="false"
+        android:enabled="false" />
 
     <CheckBox
         android:layout_width="wrap_content"
