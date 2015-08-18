@@ -1,8 +1,10 @@
 package com.adeco.finddifferences;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,6 +12,7 @@ import android.view.Window;
 import android.widget.TextView;
 
 import com.adeco.finddifferences.game.DifferenceFoundHandler;
+import com.adeco.finddifferences.game.popups.Popups;
 import com.adeco.finddifferences.game.statistics.StatisticData;
 import com.adeco.finddifferences.game.statistics.StatisticHandler;
 
@@ -20,6 +23,7 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
 
     private GameView gameView;
     private boolean vibroState;
+    private Popups popupController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +36,10 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
         Intent intent = getIntent();
         vibroState = intent.getExtras().getBoolean("vibroState");
 
+        popupController = new Popups(this);
+
         gameView = (GameView) findViewById(R.id.canvas);
-        gameView.setHandler(this, this);
+        gameView.setHandler(this, this, popupController);
     }
 
     @Override
@@ -58,14 +64,15 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
         String diffs = String.valueOf(data.getDifferencesFound());
         String moves = String.valueOf(data.getMovesTaken());
 
-        right_touches.setText(diffs);
-        tries.setText(moves);
+        right_touches.setText(diffs+"/5");
+        tries.setText(moves+"/10");
     }
 
     @Override
     public void onDifferenceFound() {
         if (vibroState) {
-            Log.d("MYTAG", String.valueOf(vibroState));
+            Vibrator v = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
+            v.vibrate(500);
         }
     }
 }
