@@ -5,15 +5,16 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 
+import com.adeco.finddifferences.GameActivity;
 import com.adeco.finddifferences.MainActivity;
 import com.adeco.finddifferences.game.Game;
-import com.adeco.finddifferences.game.states.GameStateHandler;
 import com.adeco.finddifferences.game.states.StateController;
 
 
-public class Popups implements PopupController, GameStateHandler {
+public class Popups implements PopupController {
 
     private Context context;
+
     @Override
     public void showLosePopup() {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -44,7 +45,9 @@ public class Popups implements PopupController, GameStateHandler {
                             public void onClick(DialogInterface dialog, int id) {
                                 dialog.cancel();
                                 Game.getInstance().getLevelStorage().goToNextLevel();
-                                Game.getInstance().startLevel();
+                                //Game.getInstance().startLevel();
+                                Intent intent = new Intent(context, GameActivity.class);
+                                context.startActivity(intent);
                             }
                         });
         AlertDialog alert = builder.create();

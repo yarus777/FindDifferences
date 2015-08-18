@@ -13,7 +13,7 @@ import com.adeco.finddifferences.game.levels.Level;
 import com.adeco.finddifferences.game.levels.LevelStorage;
 import com.adeco.finddifferences.game.logic.PictureLayer;
 import com.adeco.finddifferences.game.logic.points.DifferencePoint;
-import com.adeco.finddifferences.game.popups.Popups;
+import com.adeco.finddifferences.game.popups.PopupController;
 import com.adeco.finddifferences.game.states.StateController;
 import com.adeco.finddifferences.game.statistics.StatisticHandler;
 
@@ -25,6 +25,7 @@ public class Game implements Drawable, Touchable {
     private static Game instance;
 
     private Game() {
+        levelStorage = new LevelStorage();
     }
 
     public static Game getInstance() {
@@ -40,25 +41,13 @@ public class Game implements Drawable, Touchable {
     private Bitmap img2;
 
     private PictureLayer pictureLayer;
-    private StateController stateController;
-    private Context context;
-    private StatisticHandler[] statisticHandlers;
-    private DifferenceFoundHandler[] differenceHandlers;
 
-    public void init(Context context, StatisticHandler statisticHandler, DifferenceFoundHandler differenceFoundHandler, Popups popupsController) {
-        this.context = context;
+    public void start(Context context, StatisticHandler statisticHandler, DifferenceFoundHandler differenceFoundHandler, PopupController popupController) {
         AssetManager assetManager = context.getAssets();
-        levelStorage = new LevelStorage(assetManager);
+        levelStorage.load(assetManager);
 
-        stateController = new StateController();
-        stateController.addHandler(popupsController);
+        DifferenceFoundHandler[] differenceHandlers = new DifferenceFoundHandler[]{differenceFoundHandler};
 
-        statisticHandlers = new StatisticHandler[]{statisticHandler, stateController};
-        differenceHandlers = new DifferenceFoundHandler[]{differenceFoundHandler};
-    }
-
-    public void startLevel() {
-        AssetManager assetManager = context.getAssets();
         Level level = levelStorage.GetCurrentLevel();
 
         Bitmap img1raw = getBitmapFromAsset(assetManager, level.getImg1());
@@ -78,8 +67,9 @@ public class Game implements Drawable, Touchable {
         for (int i = 0; i < diffs.length; i++) {
             scaledDiffs[i] = diffs[i].scale(scaleFactor);
         }
-
-        pictureLayer = new PictureLayer(img1, img2, scaledDiffs, statisticHandlers, differenceHandlers);
+        StateController stateController = new StateController();
+        stateController.addHandler(popupController);
+        pictureLayer = new PictureLayer(img1, img2, scaledDiffs, new StatisticHandler[]{statisticHandler, stateController}, differenceHandlers);
     }
 
     public void draw(Canvas canvas) {

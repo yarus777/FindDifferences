@@ -1,6 +1,9 @@
 package com.adeco.finddifferences.game.popups;
 
-public interface PopupController {
+import com.adeco.finddifferences.game.states.GameStateHandler;
+
+public interface PopupController extends GameStateHandler {
     public void showLosePopup();
+
     public void showWinPopup();
 }

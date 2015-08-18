@@ -42,7 +42,6 @@ public class GameView extends View implements View.OnTouchListener {
     }
 
     public void init(StatisticHandler statisticHandler, DifferenceFoundHandler differenceFoundHandler, Popups losePopup) {
-        game.init(context, statisticHandler, differenceFoundHandler, losePopup);
-        game.startLevel();
+        game.start(context, statisticHandler, differenceFoundHandler, losePopup);
     }
 }

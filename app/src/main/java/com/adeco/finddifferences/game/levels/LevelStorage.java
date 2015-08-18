@@ -10,8 +10,14 @@ public class LevelStorage {
     private Level[] levels;
     private int currentLevel;
 
-    public LevelStorage(AssetManager assetManager) {
+    private boolean loaded = false;
+
+    public void load(AssetManager assetManager) {
+        if (loaded) {
+            return;
+        }
         levels = LevelParser.GetLevels(assetManager, DATA_FILE);
+        loaded = true;
     }
 
     public Level GetCurrentLevel() {

@@ -33,7 +33,7 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
         right_touches = (TextView) findViewById(R.id.right_touches);
 
         Intent intent = getIntent();
-        vibroState = intent.getExtras().getBoolean("vibroState");
+        //vibroState = intent.getExtras().getBoolean("vibroState");
 
         popupController = new Popups(this);
 
