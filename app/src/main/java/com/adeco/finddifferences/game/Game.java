@@ -14,6 +14,7 @@ import com.adeco.finddifferences.game.levels.LevelStorage;
 import com.adeco.finddifferences.game.logic.PictureLayer;
 import com.adeco.finddifferences.game.logic.points.DifferencePoint;
 import com.adeco.finddifferences.game.popups.PopupController;
+import com.adeco.finddifferences.game.settings.Settings;
 import com.adeco.finddifferences.game.states.StateController;
 import com.adeco.finddifferences.game.statistics.StatisticHandler;
 
@@ -26,6 +27,7 @@ public class Game implements Drawable, Touchable {
 
     private Game() {
         levelStorage = new LevelStorage();
+        settings = new Settings();
     }
 
     public static Game getInstance() {
@@ -36,6 +38,7 @@ public class Game implements Drawable, Touchable {
     }
 
     private LevelStorage levelStorage;
+    private Settings settings;
 
     private Bitmap img1;
     private Bitmap img2;
@@ -76,7 +79,7 @@ public class Game implements Drawable, Touchable {
         pictureLayer.draw(canvas);
     }
 
-    public static Bitmap getBitmapFromAsset(AssetManager mgr, String filePath) {
+    private static Bitmap getBitmapFromAsset(AssetManager mgr, String filePath) {
         InputStream istr;
         Bitmap bitmap = null;
         try {
@@ -87,6 +90,10 @@ public class Game implements Drawable, Touchable {
         }
 
         return bitmap;
+    }
+
+    public Settings getSettings() {
+        return settings;
     }
 
     @Override

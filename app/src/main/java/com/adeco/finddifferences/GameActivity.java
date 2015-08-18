@@ -2,7 +2,6 @@ package com.adeco.finddifferences;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.view.Menu;
@@ -11,6 +10,7 @@ import android.view.Window;
 import android.widget.TextView;
 
 import com.adeco.finddifferences.game.DifferenceFoundHandler;
+import com.adeco.finddifferences.game.Game;
 import com.adeco.finddifferences.game.popups.Popups;
 import com.adeco.finddifferences.game.statistics.StatisticData;
 import com.adeco.finddifferences.game.statistics.StatisticHandler;
@@ -21,7 +21,7 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
     private TextView right_touches;
 
     private GameView gameView;
-    private boolean vibroState;
+    //private boolean vibroState;
     private Popups popupController;
 
     @Override
@@ -32,7 +32,7 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
         tries = (TextView) findViewById(R.id.touches);
         right_touches = (TextView) findViewById(R.id.right_touches);
 
-        Intent intent = getIntent();
+        //Intent intent = getIntent();
         //vibroState = intent.getExtras().getBoolean("vibroState");
 
         popupController = new Popups(this);
@@ -69,7 +69,7 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
 
     @Override
     public void onDifferenceFound() {
-        if (vibroState) {
+        if (Game.getInstance().getSettings().Vibro) {
             Vibrator v = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
             v.vibrate(500);
         }
