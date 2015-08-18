@@ -17,4 +17,8 @@ public class LevelStorage {
     public Level GetCurrentLevel() {
         return levels[currentLevel];
     }
+
+    public void goToNextLevel() {
+        currentLevel++;
+    }
 }

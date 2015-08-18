@@ -103,4 +103,8 @@ public class Game implements Drawable, Touchable {
     public void onTouch(MotionEvent event) {
         pictureLayer.onTouch(event);
     }
+
+    public LevelStorage getLevelStorage() {
+        return levelStorage;
+    }
 }
