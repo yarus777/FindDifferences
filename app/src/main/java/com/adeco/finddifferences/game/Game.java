@@ -72,8 +72,9 @@ public class Game implements Drawable, Touchable {
         }
         StateController stateController = new StateController();
         stateController.addHandler(popupController);
-        stateController.addHandler(pictureLayer);
+
         pictureLayer = new PictureLayer(img1, img2, scaledDiffs, new StatisticHandler[]{statisticHandler, stateController}, differenceHandlers);
+        stateController.addHandler(pictureLayer);
     }
 
     public void draw(Canvas canvas) {
