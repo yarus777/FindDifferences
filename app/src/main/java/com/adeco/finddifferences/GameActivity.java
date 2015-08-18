@@ -23,7 +23,7 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
 
     private GameView gameView;
     private boolean vibroState;
-    private Popups losePopup;
+    private Popups popupController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,10 +36,10 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
         Intent intent = getIntent();
         vibroState = intent.getExtras().getBoolean("vibroState");
 
-        losePopup = new Popups();
+        popupController = new Popups(this);
 
         gameView = (GameView) findViewById(R.id.canvas);
-        gameView.setHandler(this, this, losePopup);
+        gameView.setHandler(this, this, popupController);
     }
 
     @Override

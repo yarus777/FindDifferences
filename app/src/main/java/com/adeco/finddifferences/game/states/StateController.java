@@ -17,6 +17,6 @@ public class StateController implements StatisticHandler {
     }
 
     public void addHandler(GameStateHandler handler) {
-        
+
     }
 }

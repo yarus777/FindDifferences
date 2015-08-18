@@ -12,7 +12,7 @@ import com.adeco.finddifferences.game.popups.Popups;
 import com.adeco.finddifferences.game.statistics.StatisticHandler;
 
 public class GameView extends View implements View.OnTouchListener {
-    private Game game;
+    private Game game = Game.getInstance();
     private Context context;
 
     public GameView(Context context) {
@@ -42,6 +42,6 @@ public class GameView extends View implements View.OnTouchListener {
     }
 
     public void setHandler(StatisticHandler statisticHandler, DifferenceFoundHandler differenceFoundHandler, Popups losePopup) {
-        game = new Game(context, statisticHandler, differenceFoundHandler, losePopup);
+        game.init(context, statisticHandler, differenceFoundHandler, losePopup);
     }
 }

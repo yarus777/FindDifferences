@@ -10,8 +10,6 @@ import android.widget.Button;
 import android.view.View.OnClickListener;
 import android.widget.CheckBox;
 
-import java.util.zip.CheckedInputStream;
-
 public class MainActivity extends Activity {
 
     Button startGameBtn;
@@ -35,8 +33,6 @@ public class MainActivity extends Activity {
         };
 
         startGameBtn.setOnClickListener(onClickStartBtn);
-
-
 
     }
 

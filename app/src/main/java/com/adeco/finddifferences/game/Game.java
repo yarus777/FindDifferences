@@ -21,6 +21,18 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class Game implements Drawable, Touchable {
+
+    private static Game instance;
+
+    private Game() {}
+
+    public static Game getInstance() {
+        if (instance != null) {
+            instance = new Game();
+        }
+        return instance;
+    }
+
     private LevelStorage levelStorage;
 
     private Bitmap img1;
@@ -29,7 +41,7 @@ public class Game implements Drawable, Touchable {
     private PictureLayer pictureLayer;
     private StateController stateController;
 
-    public Game(Context context, StatisticHandler statisticHandler, DifferenceFoundHandler differenceFoundHandler, Popups losePopup) {
+    public void init(Context context, StatisticHandler statisticHandler, DifferenceFoundHandler differenceFoundHandler, Popups losePopup) {
         AssetManager assetManager = context.getAssets();
         levelStorage = new LevelStorage(assetManager);
         Level level = levelStorage.GetCurrentLevel();
