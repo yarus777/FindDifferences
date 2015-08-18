@@ -51,7 +51,8 @@ public class Game implements Drawable, Touchable {
         for (int i = 0; i < diffs.length; i++) {
             scaledDiffs[i] = diffs[i].scale(scaleFactor);
         }
-        pictureLayer = new PictureLayer(img1, img2, scaledDiffs, new StatisticHandler[]{statisticHandler, stateController}, new DifferenceFoundHandler[]{});
+        stateController = new StateController();
+        pictureLayer = new PictureLayer(img1, img2, scaledDiffs, new StatisticHandler[]{statisticHandler, stateController}, new DifferenceFoundHandler[]{differenceFoundHandler});
     }
 
     public void draw(Canvas canvas) {
