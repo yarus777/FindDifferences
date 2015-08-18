@@ -23,7 +23,7 @@ public class Popups implements PopupController, GameStateHandler {
                 .setNegativeButton("ОК",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                //dialog.cancel();
+                                dialog.cancel();
                                 Intent intent = new Intent(context, MainActivity.class);
                                 context.startActivity(intent);
                             }
@@ -36,15 +36,15 @@ public class Popups implements PopupController, GameStateHandler {
     @Override
     public void showWinPopup() {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("You lost!")
-                .setMessage("Game over!")
+        builder.setTitle("You win!")
+                .setMessage("Go to next level!")
                 .setCancelable(false)
-                .setPositiveButton("Go to next level",
+                .setPositiveButton("OK",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
                                 Game.getInstance().getLevelStorage().goToNextLevel();
-                                
-                                //dialog.cancel();
+                                Game.getInstance().startLevel();
                             }
                         });
         AlertDialog alert = builder.create();

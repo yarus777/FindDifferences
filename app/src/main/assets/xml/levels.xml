@@ -14,16 +14,16 @@
     <stage>
         <image1>pic_9.jpg</image1>
         <image2>pic_9a.jpg</image2>
-        <difference x="62" y="233" radius="40" />
-        <difference x="169" y="205" radius="41" />
-        <difference x="322" y="200" radius="24" />
-        <difference x="256" y="113" radius="19" />
-        <difference x="425" y="203" radius="16" />
+        <difference x="62" y="233" radius="28" />
+        <difference x="169" y="205" radius="28" />
+        <difference x="322" y="200" radius="28" />
+        <difference x="256" y="113" radius="28" />
+        <difference x="425" y="203" radius="28" />
     </stage>
     <!-- duoc -->
     <stage>
-        <image1>images/pic_15.jpg</image1>
-        <image2>images/pic_15a.jpg</image2>
+        <image1>pic_15.jpg</image1>
+        <image2>pic_15a.jpg</image2>
         <difference x="493" y="105" radius="28" />
         <difference x="31" y="150" radius="28" />
         <difference x="493" y="165" radius="28" />
@@ -33,8 +33,8 @@
 
     <!-- duoc -->
     <stage>
-        <image1>images/pic_14.jpg</image1>
-        <image2>images/pic_14a.jpg</image2>
+        <image1>pic_14.jpg</image1>
+        <image2>pic_14a.jpg</image2>
         <difference x="228" y="149" radius="28" />
         <difference x="47" y="199" radius="28" />
         <difference x="389" y="190" radius="28" />
@@ -45,8 +45,8 @@
 
     <!-- duoc -->
     <stage>
-        <image1>images/pic_11.jpg</image1>
-        <image2>images/pic_11a.jpg</image2>
+        <image1>pic_11.jpg</image1>
+        <image2>pic_11a.jpg</image2>
         <difference x="400" y="72" radius="28" />
         <difference x="227" y="156" radius="28" />
         <difference x="452" y="283" radius="28" />

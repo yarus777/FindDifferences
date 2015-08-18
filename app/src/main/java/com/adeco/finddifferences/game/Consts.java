@@ -13,11 +13,11 @@ public class Consts {
         difPaint = new Paint();
         difPaint.setColor(Color.GREEN);
         difPaint.setStyle(Paint.Style.STROKE);
-        difPaint.setStrokeWidth(2);
+        difPaint.setStrokeWidth(4);
 
         wrongPaint = new Paint();
         wrongPaint.setColor(Color.RED);
         wrongPaint.setStyle(Paint.Style.STROKE);
-        wrongPaint.setStrokeWidth(2);
+        wrongPaint.setStrokeWidth(4);
     }
 }
