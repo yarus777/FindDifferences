@@ -41,17 +41,30 @@ public class Game implements Drawable, Touchable {
 
     private PictureLayer pictureLayer;
     private StateController stateController;
+    private Context context;
+    private StatisticHandler[] statisticHandlers;
+    private DifferenceFoundHandler[] differenceHandlers;
 
     public void init(Context context, StatisticHandler statisticHandler, DifferenceFoundHandler differenceFoundHandler, Popups popupsController) {
+        this.context = context;
         AssetManager assetManager = context.getAssets();
         levelStorage = new LevelStorage(assetManager);
+
+        stateController = new StateController();
+        stateController.addHandler(popupsController);
+
+        statisticHandlers = new StatisticHandler[]{statisticHandler, stateController};
+        differenceHandlers = new DifferenceFoundHandler[]{differenceFoundHandler};
+    }
+
+    public void startLevel() {
+        AssetManager assetManager = context.getAssets();
         Level level = levelStorage.GetCurrentLevel();
 
         Bitmap img1raw = getBitmapFromAsset(assetManager, level.getImg1());
         Bitmap img2raw = getBitmapFromAsset(assetManager, level.getImg2());
         int imgWidth = img1raw.getWidth();
         int imgHeight = img1raw.getHeight();
-
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
         int width = display.getWidth();
@@ -65,9 +78,8 @@ public class Game implements Drawable, Touchable {
         for (int i = 0; i < diffs.length; i++) {
             scaledDiffs[i] = diffs[i].scale(scaleFactor);
         }
-        stateController = new StateController();
-        stateController.addHandler(popupsController);
-        pictureLayer = new PictureLayer(img1, img2, scaledDiffs, new StatisticHandler[]{statisticHandler, stateController}, new DifferenceFoundHandler[]{differenceFoundHandler});
+
+        pictureLayer = new PictureLayer(img1, img2, scaledDiffs, statisticHandlers, differenceHandlers);
     }
 
     public void draw(Canvas canvas) {
