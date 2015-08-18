@@ -7,7 +7,7 @@ import com.adeco.finddifferences.utils.LevelParser;
 
 public class LevelStorage {
     private final static String DATA_FILE = "levels.xml";
-    private Level[] levels;
+    public Level[] levels;
     private int currentLevel;
 
     private boolean loaded = false;
@@ -24,7 +24,13 @@ public class LevelStorage {
         return levels[currentLevel];
     }
 
-    public void goToNextLevel() {
-        currentLevel++;
+    public boolean goToNextLevel() {
+
+        if (currentLevel < levels.length-1) {
+            currentLevel++;
+            return true;
+        }
+        return false;
+
     }
 }

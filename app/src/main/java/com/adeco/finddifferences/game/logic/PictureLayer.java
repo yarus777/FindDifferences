@@ -32,17 +32,15 @@ public class PictureLayer implements Drawable, Touchable, GameStateHandler {
 
     @Override
     public void onTouch(MotionEvent event) {
-        if (isInteractable) {
+        if (interactable) {
             touchManager.onTouch(event);
         }
     }
 
-    private boolean isInteractable = true;
+    private boolean interactable = true;
 
     @Override
     public void onGameStateChanged(StateController.GameState state) {
-        if (state != StateController.GameState.InProgress) {
-            isInteractable = false;
-        }
+        interactable = state == StateController.GameState.InProgress;
     }
 }
