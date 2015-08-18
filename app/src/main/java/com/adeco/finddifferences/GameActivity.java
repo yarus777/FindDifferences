@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Vibrator;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
@@ -39,7 +38,7 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
         popupController = new Popups(this);
 
         gameView = (GameView) findViewById(R.id.canvas);
-        gameView.setHandler(this, this, popupController);
+        gameView.init(this, this, popupController);
     }
 
     @Override
@@ -64,8 +63,8 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
         String diffs = String.valueOf(data.getDifferencesFound());
         String moves = String.valueOf(data.getMovesTaken());
 
-        right_touches.setText(diffs+"/5");
-        tries.setText(moves+"/10");
+        right_touches.setText(diffs + "/5");
+        tries.setText(moves + "/10");
     }
 
     @Override

@@ -24,10 +24,11 @@ public class Game implements Drawable, Touchable {
 
     private static Game instance;
 
-    private Game() {}
+    private Game() {
+    }
 
     public static Game getInstance() {
-        if (instance != null) {
+        if (instance == null) {
             instance = new Game();
         }
         return instance;
@@ -41,7 +42,7 @@ public class Game implements Drawable, Touchable {
     private PictureLayer pictureLayer;
     private StateController stateController;
 
-    public void init(Context context, StatisticHandler statisticHandler, DifferenceFoundHandler differenceFoundHandler, Popups losePopup) {
+    public void init(Context context, StatisticHandler statisticHandler, DifferenceFoundHandler differenceFoundHandler, Popups popupsController) {
         AssetManager assetManager = context.getAssets();
         levelStorage = new LevelStorage(assetManager);
         Level level = levelStorage.GetCurrentLevel();
@@ -65,6 +66,7 @@ public class Game implements Drawable, Touchable {
             scaledDiffs[i] = diffs[i].scale(scaleFactor);
         }
         stateController = new StateController();
+        stateController.addHandler(popupsController);
         pictureLayer = new PictureLayer(img1, img2, scaledDiffs, new StatisticHandler[]{statisticHandler, stateController}, new DifferenceFoundHandler[]{differenceFoundHandler});
     }
 
