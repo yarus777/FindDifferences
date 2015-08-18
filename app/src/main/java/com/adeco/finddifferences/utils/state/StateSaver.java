@@ -2,9 +2,6 @@ package com.adeco.finddifferences.utils.state;
 
 import android.content.SharedPreferences;
 
-/**
- * Created by agorbach on 18.08.2015.
- */
 public class StateSaver {
     private static StateSaver instance;
 
