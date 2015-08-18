@@ -10,10 +10,12 @@ import com.adeco.finddifferences.game.DifferenceFoundHandler;
 import com.adeco.finddifferences.game.Drawable;
 import com.adeco.finddifferences.game.Touchable;
 import com.adeco.finddifferences.game.logic.points.DifferencePoint;
+import com.adeco.finddifferences.game.states.GameStateHandler;
+import com.adeco.finddifferences.game.states.StateController;
 import com.adeco.finddifferences.game.statistics.StatisticHandler;
 
 
-public class PictureLayer implements Drawable, Touchable {
+public class PictureLayer implements Drawable, Touchable, GameStateHandler {
     private TouchManager touchManager;
 
     public PictureLayer(Bitmap img1, Bitmap img2, DifferencePoint[] diffs, StatisticHandler[] statisticHandlers, DifferenceFoundHandler[] differenceFoundHandlers) {
@@ -30,6 +32,17 @@ public class PictureLayer implements Drawable, Touchable {
 
     @Override
     public void onTouch(MotionEvent event) {
-        touchManager.onTouch(event);
+        if (isInteractable) {
+            touchManager.onTouch(event);
+        }
+    }
+
+    private boolean isInteractable = true;
+
+    @Override
+    public void onGameStateChanged(StateController.GameState state) {
+        if (state != StateController.GameState.InProgress) {
+            isInteractable = false;
+        }
     }
 }
