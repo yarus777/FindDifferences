@@ -37,17 +37,23 @@ public class Popups implements PopupController {
     @Override
     public void showWinPopup() {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("You win!")
+        builder.setTitle("You won!")
                 .setMessage("Go to next level!")
                 .setCancelable(false)
                 .setPositiveButton("OK",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 dialog.cancel();
-                                Game.getInstance().getLevelStorage().goToNextLevel();
+                                if (Game.getInstance().getLevelStorage().goToNextLevel())
                                 //Game.getInstance().startLevel();
-                                Intent intent = new Intent(context, GameActivity.class);
+                                {
+                                    Intent intent = new Intent(context, GameActivity.class);
                                 context.startActivity(intent);
+                                }
+                                else {
+                                    Intent intent = new Intent(context, MainActivity.class);
+                                    context.startActivity(intent);
+                                }
                             }
                         });
         AlertDialog alert = builder.create();
