@@ -14,7 +14,7 @@ import com.adeco.finddifferences.game.Game;
 
 public class MainActivity extends Activity {
 
-    Button startGameBtn;
+    Button startGameBtn, resumeGameBtn;
     CheckBox vibroCheck;
 
     @Override
@@ -23,6 +23,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         startGameBtn = (Button) findViewById(R.id.startGame);
+        resumeGameBtn = (Button) findViewById(R.id.resumeGame);
         vibroCheck = (CheckBox) findViewById(R.id.vibro);
 
         OnClickListener onClickStartBtn = new OnClickListener() {
@@ -31,11 +32,22 @@ public class MainActivity extends Activity {
                 Intent intent = new Intent(MainActivity.this, GameActivity.class);
                 //intent.putExtra("vibroState", vibroCheck.isChecked());
                 Game.getInstance().getSettings().Vibro = vibroCheck.isChecked();
+                Game.getInstance().getLevelStorage().resetLevel();
                 startActivity(intent);
             }
         };
 
         startGameBtn.setOnClickListener(onClickStartBtn);
+        OnClickListener onClickResumeBtn = new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, GameActivity.class);
+                //intent.putExtra("vibroState", vibroCheck.isChecked());
+                Game.getInstance().getSettings().Vibro = vibroCheck.isChecked();
+                startActivity(intent);
+            }
+        };
+        resumeGameBtn.setOnClickListener(onClickResumeBtn);
 
     }
 
