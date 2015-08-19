@@ -3,9 +3,9 @@ package com.adeco.finddifferences.game.logic;
 import android.graphics.Canvas;
 import android.view.MotionEvent;
 
-import com.adeco.finddifferences.game.DifferenceFoundHandler;
-import com.adeco.finddifferences.game.Drawable;
-import com.adeco.finddifferences.game.Touchable;
+import com.adeco.finddifferences.game.interfaces.DifferenceFoundHandler;
+import com.adeco.finddifferences.game.interfaces.Drawable;
+import com.adeco.finddifferences.game.interfaces.Touchable;
 import com.adeco.finddifferences.game.logic.points.AbstractPoint;
 import com.adeco.finddifferences.game.logic.points.DifferencePoint;
 import com.adeco.finddifferences.game.statistics.StatisticData;

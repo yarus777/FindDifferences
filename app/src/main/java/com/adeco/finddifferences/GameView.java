@@ -1,13 +1,14 @@
 package com.adeco.finddifferences;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.adeco.finddifferences.game.DifferenceFoundHandler;
 import com.adeco.finddifferences.game.Game;
+import com.adeco.finddifferences.game.interfaces.DifferenceFoundHandler;
 import com.adeco.finddifferences.game.popups.Popups;
 import com.adeco.finddifferences.game.statistics.StatisticHandler;
 
@@ -41,7 +42,7 @@ public class GameView extends View implements View.OnTouchListener {
         return true;
     }
 
-    public void init(StatisticHandler statisticHandler, DifferenceFoundHandler differenceFoundHandler, Popups losePopup) {
-        game.start(context, statisticHandler, differenceFoundHandler, losePopup);
+    public void init(SharedPreferences prefs, StatisticHandler statisticHandler, DifferenceFoundHandler differenceFoundHandler, Popups losePopup) {
+        game.start(context, prefs, statisticHandler, differenceFoundHandler, losePopup);
     }
 }

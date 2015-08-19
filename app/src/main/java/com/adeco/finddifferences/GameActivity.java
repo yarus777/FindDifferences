@@ -9,8 +9,8 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.widget.TextView;
 
-import com.adeco.finddifferences.game.DifferenceFoundHandler;
 import com.adeco.finddifferences.game.Game;
+import com.adeco.finddifferences.game.interfaces.DifferenceFoundHandler;
 import com.adeco.finddifferences.game.popups.Popups;
 import com.adeco.finddifferences.game.statistics.StatisticData;
 import com.adeco.finddifferences.game.statistics.StatisticHandler;
@@ -21,7 +21,6 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
     private TextView right_touches;
 
     private GameView gameView;
-    //private boolean vibroState;
     private Popups popupController;
 
     @Override
@@ -31,14 +30,10 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
         setContentView(R.layout.activity_game);
         tries = (TextView) findViewById(R.id.touches);
         right_touches = (TextView) findViewById(R.id.right_touches);
-
-        //Intent intent = getIntent();
-        //vibroState = intent.getExtras().getBoolean("vibroState");
-
         popupController = new Popups(this);
 
         gameView = (GameView) findViewById(R.id.canvas);
-        gameView.init(this, this, popupController);
+        gameView.init(getPreferences(Context.MODE_PRIVATE), this, this, popupController);
     }
 
     @Override
@@ -73,5 +68,11 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
             Vibrator v = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
             v.vibrate(500);
         }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Game.getInstance().onDestroy();
     }
 }

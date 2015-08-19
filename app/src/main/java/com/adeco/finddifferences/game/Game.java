@@ -1,6 +1,7 @@
 package com.adeco.finddifferences.game;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,6 +10,10 @@ import android.view.Display;
 import android.view.MotionEvent;
 import android.view.WindowManager;
 
+import com.adeco.finddifferences.game.interfaces.Destroyable;
+import com.adeco.finddifferences.game.interfaces.DifferenceFoundHandler;
+import com.adeco.finddifferences.game.interfaces.Drawable;
+import com.adeco.finddifferences.game.interfaces.Touchable;
 import com.adeco.finddifferences.game.levels.Level;
 import com.adeco.finddifferences.game.levels.LevelStorage;
 import com.adeco.finddifferences.game.logic.PictureLayer;
@@ -21,7 +26,7 @@ import com.adeco.finddifferences.game.statistics.StatisticHandler;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class Game implements Drawable, Touchable {
+public class Game implements Drawable, Touchable, Destroyable {
 
     private static Game instance;
 
@@ -38,6 +43,7 @@ public class Game implements Drawable, Touchable {
     }
 
     private LevelStorage levelStorage;
+    private SharedPreferences preferences;
     private Settings settings;
 
     private Bitmap img1;
@@ -45,9 +51,10 @@ public class Game implements Drawable, Touchable {
 
     private PictureLayer pictureLayer;
 
-    public void start(Context context, StatisticHandler statisticHandler, DifferenceFoundHandler differenceFoundHandler, PopupController popupController) {
+    public void start(Context context, SharedPreferences preferences, StatisticHandler statisticHandler, DifferenceFoundHandler differenceFoundHandler, PopupController popupController) {
+        this.preferences = preferences;
         AssetManager assetManager = context.getAssets();
-        levelStorage.load(assetManager);
+        levelStorage.load(assetManager, preferences);
 
         DifferenceFoundHandler[] differenceHandlers = new DifferenceFoundHandler[]{differenceFoundHandler};
 
@@ -105,5 +112,14 @@ public class Game implements Drawable, Touchable {
 
     public LevelStorage getLevelStorage() {
         return levelStorage;
+    }
+
+    public SharedPreferences getPreferences() {
+        return preferences;
+    }
+
+    @Override
+    public void onDestroy() {
+        levelStorage.onDestroy();
     }
 }
