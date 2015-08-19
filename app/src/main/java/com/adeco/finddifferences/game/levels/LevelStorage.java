@@ -36,7 +36,10 @@ public class LevelStorage implements Destroyable {
             return true;
         }
         return false;
+    }
 
+    public void resetLevel() {
+        currentLevel = 0;
     }
 
     @Override
