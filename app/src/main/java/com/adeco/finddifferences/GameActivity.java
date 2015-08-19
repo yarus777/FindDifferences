@@ -2,6 +2,7 @@ package com.adeco.finddifferences;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.view.Menu;
@@ -74,5 +75,12 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
     protected void onStop() {
         super.onStop();
         Game.getInstance().onDestroy();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 }
