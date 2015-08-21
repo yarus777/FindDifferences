@@ -20,6 +20,7 @@ import com.adeco.finddifferences.game.logic.PictureLayer;
 import com.adeco.finddifferences.game.logic.points.DifferencePoint;
 import com.adeco.finddifferences.game.popups.PopupController;
 import com.adeco.finddifferences.game.settings.Settings;
+import com.adeco.finddifferences.game.startedlevel.LevelStarted;
 import com.adeco.finddifferences.game.states.StateController;
 import com.adeco.finddifferences.game.statistics.StatisticHandler;
 
@@ -45,6 +46,7 @@ public class Game implements Drawable, Touchable, Destroyable {
     private LevelStorage levelStorage;
     private SharedPreferences preferences;
     private Settings settings;
+    private PopupController popupController;
 
     private Bitmap img1;
     private Bitmap img2;
@@ -53,6 +55,7 @@ public class Game implements Drawable, Touchable, Destroyable {
 
     public void start(Context context, SharedPreferences preferences, StatisticHandler statisticHandler, DifferenceFoundHandler differenceFoundHandler, PopupController popupController) {
         this.preferences = preferences;
+        this.popupController = popupController;
         AssetManager assetManager = context.getAssets();
         levelStorage.load(assetManager, preferences);
 
@@ -82,6 +85,11 @@ public class Game implements Drawable, Touchable, Destroyable {
 
         pictureLayer = new PictureLayer(img1, img2, scaledDiffs, new StatisticHandler[]{statisticHandler, stateController}, differenceHandlers);
         stateController.addHandler(pictureLayer);
+
+
+        LevelStarted levelStarted = new LevelStarted(context);
+        stateController.addHandler(levelStarted);
+        stateController.start();
     }
 
     public void draw(Canvas canvas) {
@@ -121,5 +129,9 @@ public class Game implements Drawable, Touchable, Destroyable {
     @Override
     public void onDestroy() {
         levelStorage.onDestroy();
+    }
+
+    public PopupController getPopupController() {
+        return popupController;
     }
 }

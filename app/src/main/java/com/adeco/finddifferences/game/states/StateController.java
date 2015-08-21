@@ -27,6 +27,10 @@ public class StateController implements StatisticHandler {
         handlers.add(handler);
     }
 
+    public void start() {
+        onStateChanged(GameState.InProgress);
+    }
+
     private void onStateChanged(GameState state) {
         for (GameStateHandler handler : handlers) {
             handler.onGameStateChanged(state);
