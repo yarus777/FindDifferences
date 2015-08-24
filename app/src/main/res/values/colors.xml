@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="grey">#808080</color>
-    <color name="orange">#ff8000</color>
+    <color name="btn_not_pressed_bg">#808080</color>
+    <color name="btn_pressed_bg">#ff8000</color>
 </resources>

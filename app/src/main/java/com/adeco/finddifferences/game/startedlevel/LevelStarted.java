@@ -14,14 +14,14 @@ public class LevelStarted implements GameStateHandler {
 
     @Override
     public void onGameStateChanged(StateController.GameState state) {
-        if (state == StateController.GameState.InProgress) {
+        if (state == StateController.GameState.Win) {
+            levelsleft++;
             if (levelsleft == fullVersionCount) {
                 levelsleft = 0;
                 if (Game.getInstance().getSettings().ShowFullAppDialog) {
                     Game.getInstance().getPopupController().showFullVersionPopup();
                 }
             }
-            levelsleft++;
         }
 
     }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <stages>
-    <!-- duoc -->
+
     <stage>
         <image1>images/pic_12.jpg</image1>
         <image2>images/pic_12a.jpg</image2>
@@ -10,7 +10,7 @@
         <difference x="183" y="253" radius="28" />
         <difference x="399" y="334" radius="28" />
     </stage>
-    <!-- de -->
+
     <stage>
         <image1>images/pic_9.jpg</image1>
         <image2>images/pic_9a.jpg</image2>
@@ -20,7 +20,7 @@
         <difference x="256" y="113" radius="28" />
         <difference x="425" y="203" radius="28" />
     </stage>
-    <!-- duoc -->
+
     <stage>
         <image1>images/pic_15.jpg</image1>
         <image2>images/pic_15a.jpg</image2>
@@ -31,7 +31,7 @@
         <difference x="300" y="237" radius="28" />
     </stage>
 
-    <!-- duoc -->
+
     <stage>
         <image1>images/pic_14.jpg</image1>
         <image2>images/pic_14a.jpg</image2>
@@ -43,7 +43,7 @@
     </stage>
 
 
-    <!-- duoc -->
+
     <stage>
         <image1>images/pic_11.jpg</image1>
         <image2>images/pic_11a.jpg</image2>
