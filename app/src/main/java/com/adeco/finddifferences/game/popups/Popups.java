@@ -71,17 +71,19 @@ public class Popups implements PopupController {
                 .setPositiveButton("Install",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
+                                Game.getInstance().getSettings().ShowFullAppDialog = true;
                                 Intent intent = new Intent(Intent.ACTION_VIEW);
                                 String appPackageName = context.getResources().getString(R.string.full_version_package);
                                 intent.setData(Uri.parse("market://details?id=" + appPackageName));
                                 context.startActivity(intent);
+                                dialog.cancel();
 
                             }
                         })
-                .setNegativeButton("No,thanks",
+                .setNegativeButton("No, thanks",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
+                                Game.getInstance().getSettings().ShowFullAppDialog = false;
                                 dialog.cancel();
 
                             }
@@ -89,6 +91,7 @@ public class Popups implements PopupController {
                 .setNeutralButton("Later",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
+                                Game.getInstance().getSettings().ShowFullAppDialog = true;
                                 dialog.cancel();
 
                             }

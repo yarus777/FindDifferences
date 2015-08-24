@@ -15,16 +15,18 @@ public class LevelStarted implements GameStateHandler {
     @Override
     public void onGameStateChanged(StateController.GameState state) {
         if (state == StateController.GameState.InProgress) {
-            levelsleft++;
             if (levelsleft == fullVersionCount) {
                 levelsleft = 0;
-               Game.getInstance().getPopupController().showFullVersionPopup();
+                if (Game.getInstance().getSettings().ShowFullAppDialog) {
+                    Game.getInstance().getPopupController().showFullVersionPopup();
+                }
             }
+            levelsleft++;
         }
+
     }
 
-    public LevelStarted(Context context) {
-        this.context = context;
+    public void setContext(Context context) {
         fullVersionCount = context.getResources().getInteger(R.integer.full_version_count);
     }
 }

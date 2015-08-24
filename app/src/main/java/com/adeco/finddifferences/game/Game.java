@@ -34,6 +34,7 @@ public class Game implements Drawable, Touchable, Destroyable {
     private Game() {
         levelStorage = new LevelStorage();
         settings = new Settings();
+        levelStarted = new LevelStarted();
     }
 
     public static Game getInstance() {
@@ -43,10 +44,12 @@ public class Game implements Drawable, Touchable, Destroyable {
         return instance;
     }
 
+
     private LevelStorage levelStorage;
     private SharedPreferences preferences;
     private Settings settings;
     private PopupController popupController;
+    private LevelStarted levelStarted;
 
     private Bitmap img1;
     private Bitmap img2;
@@ -58,6 +61,7 @@ public class Game implements Drawable, Touchable, Destroyable {
         this.popupController = popupController;
         AssetManager assetManager = context.getAssets();
         levelStorage.load(assetManager, preferences);
+        levelStarted.setContext(context);
 
         DifferenceFoundHandler[] differenceHandlers = new DifferenceFoundHandler[]{differenceFoundHandler};
 
@@ -86,8 +90,6 @@ public class Game implements Drawable, Touchable, Destroyable {
         pictureLayer = new PictureLayer(img1, img2, scaledDiffs, new StatisticHandler[]{statisticHandler, stateController}, differenceHandlers);
         stateController.addHandler(pictureLayer);
 
-
-        LevelStarted levelStarted = new LevelStarted(context);
         stateController.addHandler(levelStarted);
         stateController.start();
     }
