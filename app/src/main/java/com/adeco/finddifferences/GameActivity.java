@@ -4,10 +4,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.PowerManager;
 import android.os.Vibrator;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.adeco.finddifferences.game.Game;
@@ -23,12 +25,20 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
 
     private GameView gameView;
     private Popups popupController;
+    protected PowerManager.WakeLock mWakeLock;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_game);
+
+       // final PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+        //this.mWakeLock = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, "My Tag");
+        //this.mWakeLock.acquire();
+
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
         tries = (TextView) findViewById(R.id.touches);
         right_touches = (TextView) findViewById(R.id.right_touches);
         popupController = new Popups(this);
@@ -83,4 +93,10 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+
+   /* @Override
+    public void onDestroy() {
+        this.mWakeLock.release();
+        super.onDestroy();
+    }*/
 }
