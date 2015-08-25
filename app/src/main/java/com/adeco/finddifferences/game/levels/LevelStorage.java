@@ -5,6 +5,7 @@ import android.content.res.AssetManager;
 
 import com.adeco.finddifferences.game.Game;
 import com.adeco.finddifferences.game.interfaces.Destroyable;
+import com.adeco.finddifferences.utils.XmlLevelParser;
 import com.adeco.finddifferences.utils.LevelParser;
 
 
@@ -13,6 +14,11 @@ public class LevelStorage implements Destroyable {
     private final static String LEVEL_KEY = "current_level";
     public Level[] levels;
     private int currentLevel;
+    private LevelParser levelParser;
+
+    public LevelStorage() {
+        levelParser = new XmlLevelParser();
+    }
 
     private boolean loaded = false;
 
@@ -20,7 +26,7 @@ public class LevelStorage implements Destroyable {
         if (loaded) {
             return;
         }
-        levels = LevelParser.GetLevels(assetManager, DATA_FILE);
+        levels = levelParser.GetLevels(assetManager, DATA_FILE);
         currentLevel = prefs.getInt(LEVEL_KEY, 0);
         loaded = true;
     }
