@@ -1,5 +1,6 @@
 package com.adeco.finddifferences.game.states;
 
+import com.adeco.finddifferences.game.Game;
 import com.adeco.finddifferences.game.statistics.StatisticData;
 import com.adeco.finddifferences.game.statistics.StatisticHandler;
 
@@ -8,7 +9,7 @@ import java.util.List;
 
 public class StateController implements StatisticHandler {
 
-    public enum GameState {Win, Lose, InProgress}
+    public enum GameState {Win, Lose, InProgress, Completed}
 
     private List<GameStateHandler> handlers = new ArrayList<>();
 
@@ -19,7 +20,10 @@ public class StateController implements StatisticHandler {
             onStateChanged(GameState.Lose);
         }
         else if (data.getDifferencesFound()==5 && data.getMovesTaken()<=10) {
-            onStateChanged(GameState.Win);
+            if (Game.getInstance().getLevelStorage().goToNextLevel()) {
+                onStateChanged(GameState.Win);
+            }
+            else onStateChanged(GameState.Completed);
         }
     }
 

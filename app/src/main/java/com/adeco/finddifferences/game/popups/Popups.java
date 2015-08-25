@@ -5,6 +5,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.adeco.finddifferences.GameActivity;
 import com.adeco.finddifferences.MainActivity;
@@ -39,26 +43,34 @@ public class Popups implements PopupController {
     @Override
     public void showWinPopup() {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("You won!")
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.dialog_win, null);
+        builder.setView(view);
+        Button next_lvl_btn = (Button) view.findViewById(R.id.next_lvl_btn);
+        /*builder.setTitle("You won!")
                 .setMessage("Go to next level!")
                 .setCancelable(false)
                 .setPositiveButton("OK",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 dialog.cancel();
-                                if (Game.getInstance().getLevelStorage().goToNextLevel())
-                                //Game.getInstance().startLevel();
-                                {
                                     Intent intent = new Intent(context, GameActivity.class);
-                                context.startActivity(intent);
-                                }
-                                else {
-                                    Intent intent = new Intent(context, MainActivity.class);
                                     context.startActivity(intent);
-                                }
                             }
-                        });
-        AlertDialog alert = builder.create();
+                        });*/
+
+        final AlertDialog alert = builder.create();
+
+        next_lvl_btn.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                alert.dismiss();
+                Intent intent = new Intent(context, GameActivity.class);
+                context.startActivity(intent);
+            }
+        });
         alert.show();
     }
 
@@ -102,6 +114,34 @@ public class Popups implements PopupController {
     }
 
     @Override
+    public void showCompletedPopup() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.dialog_complete, null);
+        builder.setView(view);
+        Button close_btn = (Button) view.findViewById(R.id.close_dlg_btn);
+       /* builder.setTitle("You won!")
+                .setMessage(R.string.last_level_win)
+                .setCancelable(false)
+                .setPositiveButton("OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });*/
+        final AlertDialog alert = builder.create();
+        close_btn.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                alert.dismiss();
+            }
+        });
+        alert.show();
+    }
+
+    @Override
     public void onGameStateChanged(StateController.GameState state) {
         switch (state) {
             case Win:
@@ -110,7 +150,8 @@ public class Popups implements PopupController {
             case Lose:
                 showLosePopup();
                 break;
-            case InProgress:
+            case Completed:
+                showCompletedPopup();
                 break;
         }
 

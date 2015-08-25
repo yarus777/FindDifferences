@@ -9,4 +9,7 @@
     <string name="start_game">Начать игру</string>
     <string name="resume_game">Возобновить игру</string>
     <string name="text_typeface">fonts/ds_sharper.ttf</string>
+    <string name="last_level_win">Поздравляем, вы прошли пробную версию игры! Тысячи новых уровней и другие бонусы вы можете получить прямо сейчас и совершенно БЕСПЛАТНО скачав полную версию приложения с Google Play."</string>
+    <string name="level_win_txt">Поздравляем, вы прошли уровень</string>
+    <string name="go_to_next_level">Перейти на следующий уровень</string>
 </resources>

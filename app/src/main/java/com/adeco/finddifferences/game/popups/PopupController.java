@@ -8,4 +8,6 @@ public interface PopupController extends GameStateHandler {
     public void showWinPopup();
 
     public void showFullVersionPopup();
+
+    public void showCompletedPopup();
 }

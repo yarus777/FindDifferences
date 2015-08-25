@@ -1,16 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <stages>
 
-	<stage>
-        <image1>images/test.jpg</image1>
-        <image2>images/test_a.jpg</image2>
-        <difference x="400" y="72" radius="28" />
-        <difference x="227" y="156" radius="28" />
-        <difference x="452" y="283" radius="28" />
-        <difference x="188" y="301" radius="28" />
-        <difference x="142" y="365" radius="28" />
-    </stage>
-
     <stage>
         <image1>images/pic_12.jpg</image1>
         <image2>images/pic_12a.jpg</image2>
