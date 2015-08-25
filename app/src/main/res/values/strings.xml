@@ -8,4 +8,5 @@
     <string name="right_touches">Найдено:</string>
     <string name="start_game">Начать игру</string>
     <string name="resume_game">Возобновить игру</string>
+    <string name="text_typeface">fonts/ds_sharper.ttf</string>
 </resources>

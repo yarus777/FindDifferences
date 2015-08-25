@@ -3,6 +3,7 @@ package com.adeco.finddifferences;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.Vibrator;
@@ -20,8 +21,8 @@ import com.adeco.finddifferences.game.statistics.StatisticHandler;
 
 public class GameActivity extends Activity implements StatisticHandler, DifferenceFoundHandler {
 
-    private TextView tries;
-    private TextView right_touches;
+    private TextView tries, tries_txt;
+    private TextView right_touches, right_touches_txt;
 
     private GameView gameView;
     private Popups popupController;
@@ -41,6 +42,14 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
 
         tries = (TextView) findViewById(R.id.touches);
         right_touches = (TextView) findViewById(R.id.right_touches);
+        tries_txt = (TextView) findViewById(R.id.touches_txt);
+        right_touches_txt = (TextView) findViewById(R.id.right_touches_txt);
+        Typeface tf = Typeface.createFromAsset(getAssets(), getString(R.string.text_typeface));
+        tries_txt.setTypeface(tf);
+        right_touches_txt.setTypeface(tf);
+        tries.setTypeface(tf);
+        right_touches.setTypeface(tf);
+
         popupController = new Popups(this);
 
         gameView = (GameView) findViewById(R.id.canvas);
