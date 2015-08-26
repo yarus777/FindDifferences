@@ -33,6 +33,7 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
     private GameView gameView;
     private Popups popupController;
     protected PowerManager.WakeLock mWakeLock;
+    private MediaPlayer mp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +61,37 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
 
         gameView = (GameView) findViewById(R.id.canvas);
         gameView.init(getPreferences(Context.MODE_PRIVATE), this, this, popupController);
+
+        if (Game.getInstance().getSettings().Music)
+            playMusic();
+    }
+
+    public void playMusic() {
+        AssetFileDescriptor afd = null;
+        mp = new MediaPlayer();
+        try {
+            afd = getAssets().openFd("music.mp3");
+            mp.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
+            mp.prepare();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        mp.setVolume(0.1f, 0.1f);
+        mp.start();
+    }
+
+    public void playSound() {
+        AssetFileDescriptor afd = null;
+        mp = new MediaPlayer();
+        try {
+            afd = getAssets().openFd("shot.ogg");
+            mp.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
+            mp.prepare();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        mp.setVolume(3f, 3f);
+        mp.start();
     }
 
     @Override
@@ -95,18 +127,7 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
             v.vibrate(500);
         }
         if (Game.getInstance().getSettings().Sound) {
-            MediaPlayer mp;
-            AssetFileDescriptor afd = null;
-            mp = new MediaPlayer();
-            try {
-                afd = getAssets().openFd("shot.ogg");
-                mp.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
-                mp.prepare();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            mp.setVolume(1f, 1f);
-            mp.start();
+            playSound();
         }
     }
 
@@ -119,6 +140,7 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        mp.stop();
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
