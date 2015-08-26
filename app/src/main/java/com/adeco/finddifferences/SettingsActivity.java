@@ -13,10 +13,10 @@ import android.widget.CompoundButton;
 
 import com.adeco.finddifferences.game.Game;
 
-public class SettingsActivity extends Activity {
+public class SettingsActivity extends Activity  {
 
     private Button fullVersionBtn;
-    public CheckBox vibro_cb;
+    public CheckBox vibro_cb, music_cb, sound_cb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +24,8 @@ public class SettingsActivity extends Activity {
         setContentView(R.layout.activity_settings);
 
         vibro_cb = (CheckBox) findViewById(R.id.vibro_cb);
+        music_cb = (CheckBox) findViewById(R.id.music_cb);
+        sound_cb = (CheckBox) findViewById(R.id.sound_cb);
         fullVersionBtn = (Button) findViewById(R.id.full_version_btn);
 
 
@@ -40,14 +42,27 @@ public class SettingsActivity extends Activity {
         fullVersionBtn.setOnClickListener(onClickFullVersionBtn);
 
         vibro_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                                                @Override
-                                                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                                                    if (isChecked)
-                                                        Game.getInstance().getSettings().Vibro = vibro_cb.isChecked();
-                                                }
-                                            }
-        );
-        vibro_cb.setChecked(Game.getInstance().getSettings().Vibro);
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Game.getInstance().getSettings().Vibro = vibro_cb.isChecked();
+            }
+        });
+
+
+        music_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Game.getInstance().getSettings().Music = music_cb.isChecked();
+            }
+        });
+
+
+        sound_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Game.getInstance().getSettings().Sound = sound_cb.isChecked();
+            }
+        });
     }
 
     @Override
@@ -70,6 +85,14 @@ public class SettingsActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        vibro_cb.setChecked(Game.getInstance().getSettings().Vibro);
+        music_cb.setChecked(Game.getInstance().getSettings().Music);
+        sound_cb.setChecked(Game.getInstance().getSettings().Sound);
     }
 
 }

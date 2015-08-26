@@ -29,15 +29,6 @@
         android:layout_marginTop="66dp"/>
         <!--android:enabled="false" -->
 
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Vibro"
-        android:id="@+id/vibro"
-        android:layout_below="@+id/settings"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp" />
-
     <Button
         android:layout_width="130dp"
         android:layout_height="50dp"
