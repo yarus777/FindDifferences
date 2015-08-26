@@ -134,6 +134,7 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
     @Override
     protected void onStop() {
         super.onStop();
+        mp.stop();
         Game.getInstance().onDestroy();
     }
 
