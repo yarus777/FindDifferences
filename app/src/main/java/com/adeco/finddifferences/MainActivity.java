@@ -59,7 +59,7 @@ public class MainActivity extends Activity {
             }
         };
         resumeGameBtn.setOnClickListener(onClickResumeBtn);
-
+        vibroCheck.setChecked(Game.getInstance().getSettings().Vibro);
     }
 
 

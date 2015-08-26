@@ -40,13 +40,14 @@ public class SettingsActivity extends Activity {
         fullVersionBtn.setOnClickListener(onClickFullVersionBtn);
 
         vibro_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-             @Override
-             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                 if (isChecked)
-                 Game.getInstance().getSettings().Vibro = vibro_cb.isChecked();
-             }
-        }
+                                                @Override
+                                                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                                                    if (isChecked)
+                                                        Game.getInstance().getSettings().Vibro = vibro_cb.isChecked();
+                                                }
+                                            }
         );
+        vibro_cb.setChecked(Game.getInstance().getSettings().Vibro);
     }
 
     @Override
