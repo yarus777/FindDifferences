@@ -12,4 +12,10 @@
     <string name="last_level_win">Поздравляем, вы прошли пробную версию игры! Тысячи новых уровней и другие бонусы вы можете получить прямо сейчас и совершенно БЕСПЛАТНО скачав полную версию приложения с Google Play."</string>
     <string name="level_win_txt">Поздравляем, вы прошли уровень</string>
     <string name="go_to_next_level">Перейти на следующий уровень</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="settings">Настройки</string>
+    <string name="music_cb">Музыка</string>
+    <string name="sound_cb">Звук</string>
+    <string name="vibro_cb">Вибрация</string>
+    <string name="full_version_btn">Скачать полную версию</string>
 </resources>

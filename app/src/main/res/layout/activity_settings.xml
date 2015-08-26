@@ -1,0 +1,47 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.adeco.finddifferences.SettingsActivity">
+
+    <CheckBox
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:text="@string/music_cb"
+        android:id="@+id/music_cb"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="101dp" />
+
+    <CheckBox
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:text="@string/sound_cb"
+        android:id="@+id/sound_cb"
+        android:layout_below="@+id/music_cb"
+        android:layout_centerHorizontal="true" />
+
+    <CheckBox
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:text="@string/vibro_cb"
+        android:id="@+id/vibro_cb"
+        android:layout_below="@+id/sound_cb"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="@string/full_version_btn"
+        android:id="@+id/full_version_btn"
+        android:background="@drawable/selector_button"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:layout_below="@+id/vibro_cb"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="29dp" />
+</RelativeLayout>
