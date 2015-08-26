@@ -134,6 +134,7 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
     @Override
     protected void onStop() {
         super.onStop();
+        if (mp!=null)
         mp.stop();
         Game.getInstance().onDestroy();
     }
@@ -141,9 +142,17 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        if (mp!=null)
         mp.stop();
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (mp!=null)
+        mp.start();
     }
 
    /* @Override
