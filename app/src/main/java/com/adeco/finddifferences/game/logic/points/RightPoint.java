@@ -1,5 +1,7 @@
 package com.adeco.finddifferences.game.logic.points;
 
+import android.content.Context;
+
 import com.adeco.finddifferences.game.Consts;
 
 

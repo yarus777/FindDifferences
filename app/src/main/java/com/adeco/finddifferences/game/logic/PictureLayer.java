@@ -1,5 +1,6 @@
 package com.adeco.finddifferences.game.logic;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -43,4 +44,5 @@ public class PictureLayer implements Drawable, Touchable, GameStateHandler {
     public void onGameStateChanged(StateController.GameState state) {
         interactable = state == StateController.GameState.InProgress;
     }
+
 }

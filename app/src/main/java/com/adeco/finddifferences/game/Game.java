@@ -3,6 +3,7 @@ package com.adeco.finddifferences.game;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -10,6 +11,7 @@ import android.view.Display;
 import android.view.MotionEvent;
 import android.view.WindowManager;
 
+import com.adeco.finddifferences.R;
 import com.adeco.finddifferences.game.interfaces.Destroyable;
 import com.adeco.finddifferences.game.interfaces.DifferenceFoundHandler;
 import com.adeco.finddifferences.game.interfaces.Drawable;
@@ -17,7 +19,9 @@ import com.adeco.finddifferences.game.interfaces.Touchable;
 import com.adeco.finddifferences.game.levels.Level;
 import com.adeco.finddifferences.game.levels.LevelStorage;
 import com.adeco.finddifferences.game.logic.PictureLayer;
+import com.adeco.finddifferences.game.logic.points.AbstractPoint;
 import com.adeco.finddifferences.game.logic.points.DifferencePoint;
+import com.adeco.finddifferences.game.logic.points.RightPoint;
 import com.adeco.finddifferences.game.popups.PopupController;
 import com.adeco.finddifferences.game.settings.Settings;
 import com.adeco.finddifferences.game.startedlevel.LevelStarted;
@@ -53,6 +57,7 @@ public class Game implements Drawable, Touchable, Destroyable {
 
     private Bitmap img1;
     private Bitmap img2;
+    private Bitmap dif_img;
 
     private PictureLayer pictureLayer;
 
@@ -69,6 +74,7 @@ public class Game implements Drawable, Touchable, Destroyable {
 
         Bitmap img1raw = getBitmapFromAsset(assetManager, level.getImg1());
         Bitmap img2raw = getBitmapFromAsset(assetManager, level.getImg2());
+
         int imgWidth = img1raw.getWidth();
         int imgHeight = img1raw.getHeight();
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
@@ -79,6 +85,9 @@ public class Game implements Drawable, Touchable, Destroyable {
         img1 = Bitmap.createScaledBitmap(img1raw, width, height, false);
         img2 = Bitmap.createScaledBitmap(img2raw, width, height, false);
 
+        Resources res = context.getResources();
+        dif_img = BitmapFactory.decodeResource(res, R.drawable.circle);
+
         DifferencePoint[] diffs = level.getDiffs();
         DifferencePoint[] scaledDiffs = new DifferencePoint[diffs.length];
         for (int i = 0; i < diffs.length; i++) {
@@ -88,6 +97,7 @@ public class Game implements Drawable, Touchable, Destroyable {
         stateController.addHandler(popupController);
 
         pictureLayer = new PictureLayer(img1, img2, scaledDiffs, new StatisticHandler[]{statisticHandler, stateController}, differenceHandlers);
+
         stateController.addHandler(pictureLayer);
 
         stateController.addHandler(levelStarted);
@@ -109,6 +119,10 @@ public class Game implements Drawable, Touchable, Destroyable {
         }
 
         return bitmap;
+    }
+
+    public Bitmap getDifImg() {
+        return dif_img;
     }
 
     public Settings getSettings() {
