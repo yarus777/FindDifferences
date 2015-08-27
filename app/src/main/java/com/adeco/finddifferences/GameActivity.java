@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Chronometer;
 import android.widget.TextView;
 
 import com.adeco.finddifferences.game.Game;
@@ -29,6 +30,7 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
 
     private TextView tries, tries_txt;
     private TextView right_touches, right_touches_txt;
+    private Chronometer timer;
 
     private GameView gameView;
     private Popups popupController;
@@ -47,6 +49,7 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
+        timer = (Chronometer) findViewById(R.id.timer);
         tries = (TextView) findViewById(R.id.touches);
         right_touches = (TextView) findViewById(R.id.right_touches);
         tries_txt = (TextView) findViewById(R.id.touches_txt);
