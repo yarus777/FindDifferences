@@ -14,7 +14,8 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="36dp">
+            android:layout_height="36dp"
+            android:weightSum="1">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -23,7 +24,8 @@
                 android:text="@string/right_touches"
                 android:id="@+id/right_touches_txt"
                 android:gravity="left"
-                android:textSize="@dimen/text_size" />
+                android:textSize="@dimen/text_size"
+                android:layout_gravity="left" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -32,17 +34,30 @@
                 android:text="0/5"
                 android:id="@+id/right_touches"
                 android:gravity="left"
-                android:textSize="@dimen/text_size" />
+                android:textSize="@dimen/text_size"
+                android:layout_gravity="left" />
+
+            <Chronometer
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_color"
+                android:textAlignment="center"
+                android:gravity="center_horizontal"
+                android:layout_weight="1"
+                android:textSize="@dimen/text_size"
+                android:id="@+id/timer" />
+
+
 
             <TextView
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/text_color"
                 android:text="@string/tries"
                 android:id="@+id/touches_txt"
                 android:gravity="right"
-                android:layout_weight="1"
-                android:textSize="@dimen/text_size" />
+                android:textSize="@dimen/text_size"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -50,7 +65,8 @@
                 android:textColor="@color/text_color"
                 android:text="0/10"
                 android:id="@+id/touches"
-                android:textSize="@dimen/text_size" />
+                android:textSize="@dimen/text_size"
+                android:gravity="right" />
         </LinearLayout>
 
         <com.adeco.finddifferences.GameView
