@@ -28,9 +28,11 @@ public abstract class AbstractPoint {
 
 
     public void draw(Canvas canvas, Point offset) {
-        canvas.drawCircle(x + offset.x, y + offset.x, radius, paint);
-        //Bitmap dif_img = Bitmap.createScaledBitmap(Game.getInstance().getDifImg(),radius*2,radius*2,false);
-        //canvas.drawBitmap(dif_img, x + offset.x, y + offset.x, paint);
+        //canvas.drawCircle(x + offset.x, y + offset.y, radius, paint);
+        Bitmap dif_img = Bitmap.createScaledBitmap(Game.getInstance().getDifImg(),radius*2,radius*2,false);
+        int dif_img_width = dif_img.getWidth();
+        int dif_img_height = dif_img.getHeight();
+        canvas.drawBitmap(dif_img, x-dif_img_width/2 + offset.x, y-dif_img_height/2 + offset.y, paint);
     }
 
     public boolean match(DifferencePoint point) {
