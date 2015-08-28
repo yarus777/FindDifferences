@@ -13,4 +13,7 @@
     <string name="sound_cb">Sound</string>
     <string name="vibro_cb">Vibration</string>
     <string name="full_version_btn">Download full version</string>
+    <string name="menu_go_txt">Menu</string>
+    <string name="restart_lvl_txt">Restart</string>
+    <string name="next_lvl_txt">Next</string>
 </resources>

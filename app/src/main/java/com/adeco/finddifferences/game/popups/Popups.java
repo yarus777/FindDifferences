@@ -5,21 +5,25 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.adeco.finddifferences.GameActivity;
 import com.adeco.finddifferences.MainActivity;
 import com.adeco.finddifferences.R;
 import com.adeco.finddifferences.game.Game;
+import com.adeco.finddifferences.game.interfaces.TimeCounter;
 import com.adeco.finddifferences.game.states.StateController;
 
 
 public class Popups implements PopupController {
 
     private Context context;
+    private TimeCounter timeCounter;
 
     @Override
     public void showLosePopup() {
@@ -47,6 +51,9 @@ public class Popups implements PopupController {
         View view = inflater.inflate(R.layout.dialog_win, null);
         builder.setView(view);
         Button next_lvl_btn = (Button) view.findViewById(R.id.next_lvl_btn);
+        Button menu_go_btn = (Button) view.findViewById(R.id.menu_go_btn);
+        Button restart_lvl_btn = (Button) view.findViewById(R.id.restart_lvl);
+        TextView time_txt = (TextView) view.findViewById(R.id.lvl_time);
         /*builder.setTitle("You won!")
                 .setMessage("Go to next level!")
                 .setCancelable(false)
@@ -61,16 +68,42 @@ public class Popups implements PopupController {
 
         final AlertDialog alert = builder.create();
 
-        next_lvl_btn.setOnClickListener(new View.OnClickListener()
+
+        time_txt.setText(timeCounter.getLevelTime());
+
+        next_lvl_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alert.dismiss();
+                Intent intent = new Intent(context, GameActivity.class);
+                context.startActivity(intent);
+            }
+        });
+
+        menu_go_btn.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                alert.dismiss();
+                Intent intent = new Intent(context, MainActivity.class);
+                context.startActivity(intent);
+            }
+        });
+
+        restart_lvl_btn.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
                 alert.dismiss();
                 Intent intent = new Intent(context, GameActivity.class);
+                Game.getInstance().getLevelStorage().restartLevel();
                 context.startActivity(intent);
             }
         });
+
+
         alert.show();
     }
 
@@ -157,7 +190,8 @@ public class Popups implements PopupController {
 
     }
 
-    public Popups(Context context) {
+    public Popups(Context context, TimeCounter timeCounter) {
         this.context = context;
+        this.timeCounter = timeCounter;
     }
 }

@@ -11,6 +11,7 @@ import android.view.Display;
 import android.view.MotionEvent;
 import android.view.WindowManager;
 
+import com.adeco.finddifferences.GameActivity;
 import com.adeco.finddifferences.R;
 import com.adeco.finddifferences.game.interfaces.Destroyable;
 import com.adeco.finddifferences.game.interfaces.DifferenceFoundHandler;
@@ -55,15 +56,17 @@ public class Game implements Drawable, Touchable, Destroyable {
     private PopupController popupController;
     private LevelStarted levelStarted;
 
+
     private Bitmap img1;
     private Bitmap img2;
     private Bitmap dif_img;
 
     private PictureLayer pictureLayer;
 
-    public void start(Context context, SharedPreferences preferences, StatisticHandler statisticHandler, DifferenceFoundHandler differenceFoundHandler, PopupController popupController) {
+    public void start(Context context, SharedPreferences preferences, StatisticHandler statisticHandler, DifferenceFoundHandler differenceFoundHandler, PopupController popupController, GameActivity activity) {
         this.preferences = preferences;
         this.popupController = popupController;
+
         AssetManager assetManager = context.getAssets();
         levelStorage.load(assetManager, preferences);
         levelStarted.setContext(context);
@@ -101,6 +104,8 @@ public class Game implements Drawable, Touchable, Destroyable {
         stateController.addHandler(pictureLayer);
 
         stateController.addHandler(levelStarted);
+        stateController.addHandler(activity);
+
         stateController.start();
     }
 
@@ -150,4 +155,5 @@ public class Game implements Drawable, Touchable, Destroyable {
     public PopupController getPopupController() {
         return popupController;
     }
+
 }

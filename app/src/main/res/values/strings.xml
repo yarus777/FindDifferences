@@ -10,12 +10,14 @@
     <string name="resume_game">Возобновить игру</string>
     <string name="text_typeface">fonts/ds_sharper.ttf</string>
     <string name="last_level_win">Поздравляем, вы прошли пробную версию игры! Тысячи новых уровней и другие бонусы вы можете получить прямо сейчас и совершенно БЕСПЛАТНО скачав полную версию приложения с Google Play."</string>
-    <string name="level_win_txt">Поздравляем, вы прошли уровень</string>
-    <string name="go_to_next_level">Перейти на следующий уровень</string>
+    <string name="level_win_txt">Поздравляем, вы прошли уровень!</string>
     <string name="title_activity_settings">SettingsActivity</string>
     <string name="settings">Настройки</string>
     <string name="music_cb">Музыка</string>
     <string name="sound_cb">Звук</string>
     <string name="vibro_cb">Вибрация</string>
     <string name="full_version_btn">Скачать полную версию</string>
+    <string name="menu_go_txt">Меню</string>
+    <string name="restart_lvl_txt">Переиграть</string>
+    <string name="next_lvl_txt">Далее</string>
 </resources>

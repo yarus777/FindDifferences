@@ -48,6 +48,10 @@ public class LevelStorage implements Destroyable {
         currentLevel = 0;
     }
 
+    public void restartLevel() {
+        currentLevel = currentLevel - 1;
+    }
+
     @Override
     public void onDestroy() {
         SharedPreferences.Editor editor = Game.getInstance().getPreferences().edit();
