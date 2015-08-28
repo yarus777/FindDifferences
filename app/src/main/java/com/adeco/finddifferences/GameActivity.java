@@ -187,7 +187,6 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
             long stopTime = cal.getTimeInMillis();
             long millis = stopTime - start;
             int seconds = (int) (millis / 1000);
-            Log.d("MyTag", "Time " + seconds);
             timer.stop();
             }
     }
