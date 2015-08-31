@@ -7,7 +7,7 @@ import android.graphics.Paint;
 public class Consts {
     public final static Paint difPaint;
     public final static Paint wrongPaint;
-    public static final int wrongRadius = 30;
+    public static final int wrongRadius = 28;
 
     static {
         difPaint = new Paint();

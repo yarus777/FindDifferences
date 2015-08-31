@@ -26,6 +26,9 @@ public abstract class AbstractPoint {
 
     }
 
+    public int getX() {return x;}
+    public int getY() {return y;}
+
 
     public void draw(Canvas canvas, Point offset) {
         //canvas.drawCircle(x + offset.x, y + offset.y, radius, paint);

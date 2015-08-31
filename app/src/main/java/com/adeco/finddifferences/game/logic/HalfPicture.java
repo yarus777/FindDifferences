@@ -9,6 +9,7 @@ import android.graphics.Point;
 import com.adeco.finddifferences.game.logic.points.AbstractPoint;
 import com.adeco.finddifferences.game.logic.points.DifferencePoint;
 import com.adeco.finddifferences.game.logic.points.RightPoint;
+import com.adeco.finddifferences.game.logic.points.WrongPoint;
 
 import java.util.List;
 

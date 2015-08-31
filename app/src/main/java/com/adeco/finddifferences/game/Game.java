@@ -16,17 +16,13 @@ import com.adeco.finddifferences.R;
 import com.adeco.finddifferences.game.interfaces.Destroyable;
 import com.adeco.finddifferences.game.interfaces.DifferenceFoundHandler;
 import com.adeco.finddifferences.game.interfaces.Drawable;
-import com.adeco.finddifferences.game.interfaces.TimeCounter;
 import com.adeco.finddifferences.game.interfaces.Touchable;
 import com.adeco.finddifferences.game.levels.Level;
 import com.adeco.finddifferences.game.levels.LevelStorage;
 import com.adeco.finddifferences.game.logic.PictureLayer;
-import com.adeco.finddifferences.game.logic.points.AbstractPoint;
 import com.adeco.finddifferences.game.logic.points.DifferencePoint;
-import com.adeco.finddifferences.game.logic.points.RightPoint;
 import com.adeco.finddifferences.game.popups.PopupController;
 import com.adeco.finddifferences.game.score.ScoreController;
-import com.adeco.finddifferences.game.score.ScoreHandler;
 import com.adeco.finddifferences.game.settings.Settings;
 import com.adeco.finddifferences.game.startedlevel.LevelStarted;
 import com.adeco.finddifferences.game.states.StateController;
@@ -63,7 +59,7 @@ public class Game implements Drawable, Touchable, Destroyable {
 
     private Bitmap img1;
     private Bitmap img2;
-    private Bitmap dif_img;
+    private Bitmap dif_img, wrong_img;
 
     private PictureLayer pictureLayer;
 
@@ -94,6 +90,7 @@ public class Game implements Drawable, Touchable, Destroyable {
 
         Resources res = context.getResources();
         dif_img = BitmapFactory.decodeResource(res, R.drawable.circle);
+        wrong_img = BitmapFactory.decodeResource(res, R.drawable.miss);
 
         DifferencePoint[] diffs = level.getDiffs();
         DifferencePoint[] scaledDiffs = new DifferencePoint[diffs.length];
@@ -137,6 +134,8 @@ public class Game implements Drawable, Touchable, Destroyable {
     public Bitmap getDifImg() {
         return dif_img;
     }
+
+    public Bitmap getWrongImg() {return wrong_img;}
 
     public Settings getSettings() {
         return settings;

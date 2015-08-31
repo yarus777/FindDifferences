@@ -86,7 +86,7 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
         AssetFileDescriptor afd = null;
         mp = new MediaPlayer();
         try {
-            afd = getAssets().openFd("music.mp3");
+            afd = getAssets().openFd("sounds/music.mp3");
             mp.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
             mp.prepare();
         } catch (IOException e) {
@@ -96,11 +96,25 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
         mp.start();
     }
 
-    public void playSound() {
+    public void playRightTouchSound() {
         AssetFileDescriptor afd = null;
         mp = new MediaPlayer();
         try {
-            afd = getAssets().openFd("shot.ogg");
+            afd = getAssets().openFd("sounds/shot.ogg");
+            mp.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
+            mp.prepare();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        mp.setVolume(3f, 3f);
+        mp.start();
+    }
+
+    public void playWrongTouchSound() {
+        AssetFileDescriptor afd = null;
+        mp = new MediaPlayer();
+        try {
+            afd = getAssets().openFd("sounds/miss.ogg");
             mp.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
             mp.prepare();
         } catch (IOException e) {
@@ -143,7 +157,14 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
             v.vibrate(500);
         }
         if (Game.getInstance().getSettings().Sound) {
-            playSound();
+            playRightTouchSound();
+        }
+    }
+
+    @Override
+    public void onWrongTouch() {
+        if (Game.getInstance().getSettings().Sound) {
+            playWrongTouchSound();
         }
     }
 

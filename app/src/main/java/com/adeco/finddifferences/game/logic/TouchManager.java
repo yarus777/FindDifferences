@@ -8,6 +8,7 @@ import com.adeco.finddifferences.game.interfaces.Drawable;
 import com.adeco.finddifferences.game.interfaces.Touchable;
 import com.adeco.finddifferences.game.logic.points.AbstractPoint;
 import com.adeco.finddifferences.game.logic.points.DifferencePoint;
+import com.adeco.finddifferences.game.logic.points.WrongPoint;
 import com.adeco.finddifferences.game.statistics.StatisticData;
 import com.adeco.finddifferences.game.statistics.StatisticHandler;
 
@@ -52,6 +53,12 @@ public class TouchManager implements Touchable, Drawable {
                     for(DifferenceFoundHandler handler: differenceFoundHandlers)
                         handler.onDifferenceFound();
 
+                }
+                else {
+                    WrongPoint wrongPoint = new WrongPoint(x,y);
+                    diffs.add(wrongPoint);
+                    for(DifferenceFoundHandler handler: differenceFoundHandlers)
+                        handler.onWrongTouch();
                 }
                 statistics.onMove();
                 for (StatisticHandler handler : statisticHandlers) {
