@@ -39,14 +39,13 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
     private TextView tries, tries_txt;
     private TextView right_touches, right_touches_txt;
     private Chronometer timer;
+    private Stopwatch stopWatch;
 
     private GameView gameView;
     private Popups popupController;
     protected PowerManager.WakeLock mWakeLock;
     private MediaPlayer mp;
 
-    Calendar cal;
-    private static long mStartTime = 0L;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +59,7 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
+        stopWatch = new Stopwatch();
 
         timer = (Chronometer) findViewById(R.id.timer);
         tries = (TextView) findViewById(R.id.touches);
@@ -176,17 +176,11 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
 
         if (state == StateController.GameState.InProgress) {
             timer.start();
-            cal = Calendar.getInstance();
-            mStartTime = cal.getTimeInMillis();
+            stopWatch.start();
         }
         else
         {
-
-            final long start = mStartTime;
-            cal = Calendar.getInstance();
-            long stopTime = cal.getTimeInMillis();
-            long millis = stopTime - start;
-            int seconds = (int) (millis / 1000);
+            stopWatch.stop();
             timer.stop();
             }
     }
@@ -194,6 +188,13 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
     @Override
     public String getLevelTime() {
         return timer.getText().toString();
+    }
+
+    @Override
+    public int getTimeSinceStart() {
+        int seconds = (int) (stopWatch.getElapsedTimeSecs()+stopWatch.getElapsedTimeMin()*60);
+        Log.d("MyTag","Seconds" + seconds);
+        return seconds;
     }
 
 

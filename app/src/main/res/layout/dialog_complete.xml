@@ -34,7 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/selector_button"
-            android:text="OK"
+            android:text="@string/full_version_btn"
             android:id="@+id/close_dlg_btn"
             android:gravity="center"
             android:layout_gravity="bottom"

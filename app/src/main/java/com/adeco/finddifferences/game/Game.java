@@ -16,6 +16,7 @@ import com.adeco.finddifferences.R;
 import com.adeco.finddifferences.game.interfaces.Destroyable;
 import com.adeco.finddifferences.game.interfaces.DifferenceFoundHandler;
 import com.adeco.finddifferences.game.interfaces.Drawable;
+import com.adeco.finddifferences.game.interfaces.TimeCounter;
 import com.adeco.finddifferences.game.interfaces.Touchable;
 import com.adeco.finddifferences.game.levels.Level;
 import com.adeco.finddifferences.game.levels.LevelStorage;
@@ -24,6 +25,8 @@ import com.adeco.finddifferences.game.logic.points.AbstractPoint;
 import com.adeco.finddifferences.game.logic.points.DifferencePoint;
 import com.adeco.finddifferences.game.logic.points.RightPoint;
 import com.adeco.finddifferences.game.popups.PopupController;
+import com.adeco.finddifferences.game.score.ScoreController;
+import com.adeco.finddifferences.game.score.ScoreHandler;
 import com.adeco.finddifferences.game.settings.Settings;
 import com.adeco.finddifferences.game.startedlevel.LevelStarted;
 import com.adeco.finddifferences.game.states.StateController;
@@ -55,6 +58,7 @@ public class Game implements Drawable, Touchable, Destroyable {
     private Settings settings;
     private PopupController popupController;
     private LevelStarted levelStarted;
+    private ScoreController scoreController;
 
 
     private Bitmap img1;
@@ -96,10 +100,14 @@ public class Game implements Drawable, Touchable, Destroyable {
         for (int i = 0; i < diffs.length; i++) {
             scaledDiffs[i] = diffs[i].scale(scaleFactor);
         }
+
+
         StateController stateController = new StateController();
         stateController.addHandler(popupController);
 
-        pictureLayer = new PictureLayer(img1, img2, scaledDiffs, new StatisticHandler[]{statisticHandler, stateController}, differenceHandlers);
+        scoreController = new ScoreController(activity);
+
+        pictureLayer = new PictureLayer(img1, img2, scaledDiffs, new StatisticHandler[]{statisticHandler, scoreController, stateController}, differenceHandlers);
 
         stateController.addHandler(pictureLayer);
 
@@ -156,4 +164,7 @@ public class Game implements Drawable, Touchable, Destroyable {
         return popupController;
     }
 
+    public ScoreController getScoreController() {
+        return scoreController;
+    }
 }

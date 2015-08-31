@@ -4,11 +4,13 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.Image;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -54,6 +56,19 @@ public class Popups implements PopupController {
         Button menu_go_btn = (Button) view.findViewById(R.id.menu_go_btn);
         Button restart_lvl_btn = (Button) view.findViewById(R.id.restart_lvl);
         TextView time_txt = (TextView) view.findViewById(R.id.lvl_time);
+        ImageView star1 = (ImageView) view.findViewById(R.id.star1);
+        ImageView star2 = (ImageView) view.findViewById(R.id.star2);
+        ImageView star3 = (ImageView) view.findViewById(R.id.star3);
+        int starsCount = Game.getInstance().getScoreController().getStarsCount();
+        if (starsCount == 1)
+        {
+            star2.setImageResource(R.drawable.starempty);
+            star3.setImageResource(R.drawable.starempty);
+        }
+        else if (starsCount == 2) {
+            star3.setImageResource(R.drawable.starempty);
+
+        }
         /*builder.setTitle("You won!")
                 .setMessage("Go to next level!")
                 .setCancelable(false)
@@ -168,6 +183,10 @@ public class Popups implements PopupController {
             @Override
             public void onClick(View v)
             {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                String appPackageName = context.getResources().getString(R.string.full_version_package);
+                intent.setData(Uri.parse("market://details?id=" + appPackageName));
+                context.startActivity(intent);
                 alert.dismiss();
             }
         });
