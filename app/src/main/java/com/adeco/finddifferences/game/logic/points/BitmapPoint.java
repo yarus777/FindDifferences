@@ -1,7 +1,9 @@
 package com.adeco.finddifferences.game.logic.points;
 
-import com.adeco.finddifferences.game.Consts;
-
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Point;
 
 public abstract class BitmapPoint extends AbstractPoint {
 	private Bitmap bitmap;

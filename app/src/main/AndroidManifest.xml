@@ -40,6 +40,11 @@
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"
+            android:theme="@android:style/Theme.Black.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".LevelsActivity"
+            android:label="@string/title_activity_levels"
             android:theme="@android:style/Theme.Black.NoTitleBar">
         </activity>
     </application>
