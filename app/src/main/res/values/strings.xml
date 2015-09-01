@@ -20,4 +20,7 @@
     <string name="menu_go_txt">Меню</string>
     <string name="restart_lvl_txt">Переиграть</string>
     <string name="next_lvl_txt">Далее</string>
+    <string name="title_activity_levels">LevelsActivity</string>
+
+    <string name="hello_world">Hello world!</string>
 </resources>
