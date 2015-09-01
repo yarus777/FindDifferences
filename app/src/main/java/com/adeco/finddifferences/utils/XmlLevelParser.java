@@ -50,7 +50,7 @@ public class XmlLevelParser implements LevelParser {
                         int r = Integer.parseInt(item.getAttribute("radius"));
                         differences[d] = new DifferencePoint(x, y, r);
                     }
-                    levels[i] = new Level(img1, img2, differences);
+                    levels[i] = new Level(0,img1, img2, differences);
                 }
             }
             return levels;

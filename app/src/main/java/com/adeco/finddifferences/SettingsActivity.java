@@ -44,7 +44,7 @@ public class SettingsActivity extends Activity  {
         vibro_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Game.getInstance().getSettings().Vibro = vibro_cb.isChecked();
+                ((Game) getApplicationContext()).getSettings().Vibro = vibro_cb.isChecked();
             }
         });
 
@@ -52,7 +52,7 @@ public class SettingsActivity extends Activity  {
         music_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Game.getInstance().getSettings().Music = music_cb.isChecked();
+                ((Game) getApplicationContext()).getSettings().Music = music_cb.isChecked();
             }
         });
 
@@ -60,7 +60,7 @@ public class SettingsActivity extends Activity  {
         sound_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Game.getInstance().getSettings().Sound = sound_cb.isChecked();
+                ((Game) getApplicationContext()).getSettings().Sound = sound_cb.isChecked();
             }
         });
     }
@@ -90,9 +90,9 @@ public class SettingsActivity extends Activity  {
     @Override
     protected void onResume() {
         super.onResume();
-        vibro_cb.setChecked(Game.getInstance().getSettings().Vibro);
-        music_cb.setChecked(Game.getInstance().getSettings().Music);
-        sound_cb.setChecked(Game.getInstance().getSettings().Sound);
+        vibro_cb.setChecked(((Game) getApplicationContext()).getSettings().Vibro);
+        music_cb.setChecked(((Game) getApplicationContext()).getSettings().Music);
+        sound_cb.setChecked(((Game) getApplicationContext()).getSettings().Sound);
     }
 
 }

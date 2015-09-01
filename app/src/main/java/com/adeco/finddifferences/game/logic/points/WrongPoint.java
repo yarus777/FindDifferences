@@ -7,6 +7,7 @@ import android.graphics.Point;
 
 import com.adeco.finddifferences.game.Consts;
 import com.adeco.finddifferences.game.Game;
+import com.adeco.finddifferences.utils.Graphics;
 
 
 public class WrongPoint extends BitmapPoint {
@@ -16,7 +17,7 @@ public class WrongPoint extends BitmapPoint {
 
     private int alpha;
     public WrongPoint(int x, int y) {
-        super(x, y, Consts.wrongRadius, Game.getInstance().getWrongImg(), new Paint());
+        super(x, y, Consts.wrongRadius, Graphics.wrongImg, new Paint());
         offset = new Point(0, 0);
         alpha = START_ALPHA;
         paint.setAlpha(alpha);

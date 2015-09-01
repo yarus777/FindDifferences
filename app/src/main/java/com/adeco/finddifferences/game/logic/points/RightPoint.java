@@ -7,16 +7,17 @@ import android.graphics.Point;
 
 import com.adeco.finddifferences.game.Consts;
 import com.adeco.finddifferences.game.Game;
+import com.adeco.finddifferences.utils.Graphics;
 
 
 public class RightPoint extends BitmapPoint {
 	private Bitmap bitmap;
-	private int width;
-	private int height;
-	private Paint paint;
+    private int width;
+    private int height;
+    private Paint paint;
 
     public RightPoint(DifferencePoint dif) {
-        super(dif.getX(), dif.getY(), dif.getRadius(), Game.getInstance().getDifImg(), Consts.difPaint);
+        super(dif.getX(), dif.getY(), dif.getRadius(), Graphics.difImg, Consts.difPaint);
     }
 
 }

@@ -41,7 +41,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, GameActivity.class);
-                Game.getInstance().getLevelStorage().resetLevel();
+                ((Game) getApplicationContext()).getLevelStorage().resetLevel();
                 startActivity(intent);
             }
         };

@@ -1,5 +1,6 @@
 package com.adeco.finddifferences.game;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
@@ -7,6 +8,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.WindowManager;
@@ -27,35 +29,39 @@ import com.adeco.finddifferences.game.settings.Settings;
 import com.adeco.finddifferences.game.startedlevel.LevelStarted;
 import com.adeco.finddifferences.game.states.StateController;
 import com.adeco.finddifferences.game.statistics.StatisticHandler;
+import com.adeco.finddifferences.utils.Graphics;
 
 import java.io.IOException;
 import java.io.InputStream;
 
-public class Game implements Drawable, Touchable, Destroyable {
+public class Game extends Application implements Drawable, Touchable, Destroyable {
+    public static final String PREFS_NAME = "shared_prefs";
+    private AssetManager assetManager;
+    private LevelStorage levelStorage;
+    private SharedPreferences preferences;
 
-    private static Game instance;
-
-    private Game() {
-        levelStorage = new LevelStorage();
+   @Override
+   public  void onCreate() {
+        assetManager = getAssets();
+        preferences = this.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        Log.d("MY_TAG", "a " + assetManager + "p " + preferences);
+        levelStorage = new LevelStorage(assetManager, preferences);
         settings = new Settings();
         levelStarted = new LevelStarted();
+        Graphics.init(assetManager);
     }
 
-    public static Game getInstance() {
+   /* public static Game getInstance() {
         if (instance == null) {
             instance = new Game();
         }
         return instance;
-    }
+    }*/
 
-
-    private LevelStorage levelStorage;
-    private SharedPreferences preferences;
     private Settings settings;
     private PopupController popupController;
     private LevelStarted levelStarted;
     private ScoreController scoreController;
-
 
     private Bitmap img1;
     private Bitmap img2;
@@ -63,17 +69,17 @@ public class Game implements Drawable, Touchable, Destroyable {
 
     private PictureLayer pictureLayer;
 
-    public void start(Context context, SharedPreferences preferences, StatisticHandler statisticHandler, DifferenceFoundHandler differenceFoundHandler, PopupController popupController, GameActivity activity) {
-        this.preferences = preferences;
+    public void start(StatisticHandler statisticHandler, DifferenceFoundHandler differenceFoundHandler, PopupController popupController, GameActivity activity) {
         this.popupController = popupController;
+        Context context = getApplicationContext();
 
-        AssetManager assetManager = context.getAssets();
-        levelStorage.load(assetManager, preferences);
-        levelStarted.setContext(context);
+        AssetManager assetManager = getAssets();
+
+        levelStarted.init(this);
 
         DifferenceFoundHandler[] differenceHandlers = new DifferenceFoundHandler[]{differenceFoundHandler};
 
-        Level level = levelStorage.GetCurrentLevel();
+        Level level = levelStorage.getCurrentLevel();
 
         Bitmap img1raw = getBitmapFromAsset(assetManager, level.getImg1());
         Bitmap img2raw = getBitmapFromAsset(assetManager, level.getImg2());
@@ -99,7 +105,7 @@ public class Game implements Drawable, Touchable, Destroyable {
         }
 
 
-        StateController stateController = new StateController();
+        StateController stateController = new StateController(levelStorage);
         stateController.addHandler(popupController);
 
         scoreController = new ScoreController(activity);
@@ -118,7 +124,7 @@ public class Game implements Drawable, Touchable, Destroyable {
         pictureLayer.draw(canvas);
     }
 
-    private static Bitmap getBitmapFromAsset(AssetManager mgr, String filePath) {
+    public static Bitmap getBitmapFromAsset(AssetManager mgr, String filePath) {
         InputStream istr;
         Bitmap bitmap = null;
         try {

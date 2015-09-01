@@ -7,14 +7,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.GridView;
 
+import com.adeco.finddifferences.game.Game;
 import com.adeco.finddifferences.game.LevelImageAdapter;
+import com.adeco.finddifferences.game.levels.Level;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class LevelsActivity extends Activity {
-    ArrayList<String> listPath;
+    List<String> listPath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,20 +26,11 @@ public class LevelsActivity extends Activity {
 
 
         AssetManager assetManager = getResources().getAssets();
-        try {
-            String[] files = assetManager.list("lvl_images");
-            listPath = new ArrayList<String>();
-            for (String strImageName : files) {
-                String pathAssets = "lvl_images" + File.separator
-                        + strImageName;
-                listPath.add(pathAssets);
-
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        //String[] files = assetManager.list("lvl_images");
+        listPath = new ArrayList<String>();
+        for (Level level: ((Game) getApplicationContext()).getLevelStorage().levels) {
+            listPath.add(level.getImg1());
         }
-
-
 
 
         GridView gridview = (GridView) findViewById(R.id.gridView);

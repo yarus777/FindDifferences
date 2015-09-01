@@ -1,6 +1,7 @@
 {
   "levels": [
     {
+      "number": 0,
       "image1": "lvl_images/pic_12.jpg",
       "image2": "lvl_images/pic_12a.jpg",
       "diffs": [
@@ -32,6 +33,7 @@
       ]
     },
     {
+      "number": 1,
       "image1": "lvl_images/pic_9.jpg",
       "image2": "lvl_images/pic_9a.jpg",
       "diffs": [
@@ -63,6 +65,7 @@
       ]
     },
 	{
+	  "number": 2,
       "image1": "lvl_images/pic_15.jpg",
       "image2": "lvl_images/pic_15a.jpg",
       "diffs": [
@@ -94,6 +97,7 @@
       ]
     },
 	{
+	  "number": 3,
       "image1": "lvl_images/pic_14.jpg",
       "image2": "lvl_images/pic_14a.jpg",
       "diffs": [
@@ -125,6 +129,7 @@
       ]
     },
 	{
+	  "number": 4,
       "image1": "lvl_images/pic_11.jpg",
       "image2": "lvl_images/pic_11a.jpg",
       "diffs": [

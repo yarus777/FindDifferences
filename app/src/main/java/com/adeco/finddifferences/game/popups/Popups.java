@@ -26,6 +26,7 @@ public class Popups implements PopupController {
 
     private Context context;
     private TimeCounter timeCounter;
+    private Game game;
 
     @Override
     public void showLosePopup() {
@@ -59,7 +60,7 @@ public class Popups implements PopupController {
         ImageView star1 = (ImageView) view.findViewById(R.id.star1);
         ImageView star2 = (ImageView) view.findViewById(R.id.star2);
         ImageView star3 = (ImageView) view.findViewById(R.id.star3);
-        int starsCount = Game.getInstance().getScoreController().getStarsCount();
+        int starsCount = game.getScoreController().getStarsCount();
         if (starsCount == 1)
         {
             star2.setImageResource(R.drawable.starempty);
@@ -113,7 +114,7 @@ public class Popups implements PopupController {
             {
                 alert.dismiss();
                 Intent intent = new Intent(context, GameActivity.class);
-                Game.getInstance().getLevelStorage().restartLevel();
+                game.getLevelStorage().restartLevel();
                 context.startActivity(intent);
             }
         });
@@ -131,7 +132,7 @@ public class Popups implements PopupController {
                 .setPositiveButton("Install",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                Game.getInstance().getSettings().ShowFullAppDialog = true;
+                                game.getSettings().ShowFullAppDialog = true;
                                 Intent intent = new Intent(Intent.ACTION_VIEW);
                                 String appPackageName = context.getResources().getString(R.string.full_version_package);
                                 intent.setData(Uri.parse("market://details?id=" + appPackageName));
@@ -143,7 +144,7 @@ public class Popups implements PopupController {
                 .setNegativeButton("No, thanks",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                Game.getInstance().getSettings().ShowFullAppDialog = false;
+                                game.getSettings().ShowFullAppDialog = false;
                                 dialog.cancel();
 
                             }
@@ -151,7 +152,7 @@ public class Popups implements PopupController {
                 .setNeutralButton("Later",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                Game.getInstance().getSettings().ShowFullAppDialog = true;
+                                game.getSettings().ShowFullAppDialog = true;
                                 dialog.cancel();
 
                             }
@@ -209,8 +210,9 @@ public class Popups implements PopupController {
 
     }
 
-    public Popups(Context context, TimeCounter timeCounter) {
+    public Popups(Context context, TimeCounter timeCounter, Game applicationContext) {
         this.context = context;
         this.timeCounter = timeCounter;
+        this.game = applicationContext;
     }
 }

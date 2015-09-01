@@ -18,13 +18,14 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 public class LevelImageAdapter extends BaseAdapter{
 
     private Context context;
-    private ArrayList<String> griRowItems;
+    private List<String> griRowItems;
 
-    public LevelImageAdapter(Context context, ArrayList<String> griRowItems) {
+    public LevelImageAdapter(Context context, List<String> griRowItems) {
         this.context = context;
         this.griRowItems = griRowItems;
     }

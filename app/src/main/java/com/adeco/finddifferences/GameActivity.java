@@ -73,12 +73,12 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
         right_touches.setTypeface(tf);
         timer.setTypeface(tf);
 
-        popupController = new Popups(this, this);
+        popupController = new Popups(this, this, (Game) getApplicationContext() );
 
         gameView = (GameView) findViewById(R.id.canvas);
-        gameView.init(getPreferences(Context.MODE_PRIVATE), this, this, popupController, this);
+        gameView.init(this, this, popupController, this);
 
-        if (Game.getInstance().getSettings().Music)
+        if (((Game) getApplicationContext()).getSettings().Music)
             playMusic();
     }
 
@@ -152,18 +152,18 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
 
     @Override
     public void onDifferenceFound() {
-        if (Game.getInstance().getSettings().Vibro) {
+        if (((Game) getApplicationContext()).getSettings().Vibro) {
             Vibrator v = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
             v.vibrate(500);
         }
-        if (Game.getInstance().getSettings().Sound) {
+        if (((Game) getApplicationContext()).getSettings().Sound) {
             playRightTouchSound();
         }
     }
 
     @Override
     public void onWrongTouch() {
-        if (Game.getInstance().getSettings().Sound) {
+        if (((Game) getApplicationContext()).getSettings().Sound) {
             playWrongTouchSound();
         }
     }
@@ -173,7 +173,7 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
         super.onStop();
         if (mp!=null)
         mp.stop();
-        Game.getInstance().onDestroy();
+        ((Game) getApplicationContext()).onDestroy();
     }
 
     @Override

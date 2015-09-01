@@ -2,6 +2,7 @@ package com.adeco.finddifferences.game.levels;
 
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
+import android.util.Log;
 
 import com.adeco.finddifferences.game.Game;
 import com.adeco.finddifferences.game.interfaces.Destroyable;
@@ -16,14 +17,18 @@ public class LevelStorage implements Destroyable {
     public Level[] levels;
     private int currentLevel;
     private LevelParser levelParser;
+    private SharedPreferences prefs;
 
-    public LevelStorage() {
+    public LevelStorage(AssetManager assets, SharedPreferences prefs) {
         levelParser = new JsonLevelParser();
+        this.prefs = prefs;
+        Log.d("MY_TAG", prefs + "");
+        load(assets);
     }
 
     private boolean loaded = false;
 
-    public void load(AssetManager assetManager, SharedPreferences prefs) {
+    private void load(AssetManager assetManager) {
         if (loaded) {
             return;
         }
@@ -32,12 +37,11 @@ public class LevelStorage implements Destroyable {
         loaded = true;
     }
 
-    public Level GetCurrentLevel() {
+    public Level getCurrentLevel() {
         return levels[currentLevel];
     }
 
     public boolean goToNextLevel() {
-
         if (currentLevel < levels.length - 1) {
             currentLevel++;
             return true;
@@ -55,7 +59,7 @@ public class LevelStorage implements Destroyable {
 
     @Override
     public void onDestroy() {
-        SharedPreferences.Editor editor = Game.getInstance().getPreferences().edit();
+        SharedPreferences.Editor editor = prefs.edit();
         editor.putInt(LEVEL_KEY, currentLevel);
         editor.commit();
     }

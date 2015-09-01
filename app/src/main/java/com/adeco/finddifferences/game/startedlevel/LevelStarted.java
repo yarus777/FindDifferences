@@ -9,7 +9,7 @@ import com.adeco.finddifferences.game.states.StateController;
 
 public class LevelStarted implements GameStateHandler {
     private int levelsleft;
-    private Context context;
+    private Game game;
     private int fullVersionCount;
 
     @Override
@@ -18,15 +18,16 @@ public class LevelStarted implements GameStateHandler {
             levelsleft++;
             if (levelsleft == fullVersionCount) {
                 levelsleft = 0;
-                if (Game.getInstance().getSettings().ShowFullAppDialog) {
-                    Game.getInstance().getPopupController().showFullVersionPopup();
+                if (game.getSettings().ShowFullAppDialog) {
+                    game.getPopupController().showFullVersionPopup();
                 }
             }
         }
 
     }
 
-    public void setContext(Context context) {
-        fullVersionCount = context.getResources().getInteger(R.integer.full_version_count);
+    public void init(Game game) {
+        fullVersionCount = game.getResources().getInteger(R.integer.full_version_count);
+        this.game = game;
     }
 }

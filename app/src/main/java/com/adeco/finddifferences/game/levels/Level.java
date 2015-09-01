@@ -7,8 +7,10 @@ public class Level {
     private String img1;
     private String img2;
     private DifferencePoint[] diffs;
+    private int number;
 
-    public Level(String img1, String img2, DifferencePoint[] diffs) {
+    public Level(int number, String img1, String img2, DifferencePoint[] diffs) {
+        this.number = number;
         this.img1 = img1;
         this.img2 = img2;
         this.diffs = diffs;
@@ -24,5 +26,9 @@ public class Level {
 
     public DifferencePoint[] getDiffs() {
         return diffs;
+    }
+
+    public int getNumber(){
+        return number;
     }
 }
