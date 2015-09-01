@@ -34,11 +34,12 @@ public class GameView extends View implements View.OnTouchListener {
     @Override
     protected void onDraw(Canvas canvas) {
         game.draw(canvas);
+        invalidate();
     }
 
     public boolean onTouch(View view, MotionEvent event) {
         game.onTouch(event);
-        invalidate();
+        //invalidate();
         return true;
     }
 
