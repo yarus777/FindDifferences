@@ -50,7 +50,10 @@ public class MainActivity extends Activity {
         OnClickListener onClickResumeBtn = new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, GameActivity.class);
+                //Intent intent = new Intent(MainActivity.this, GameActivity.class);
+                //startActivity(intent);
+
+                Intent intent = new Intent(MainActivity.this, LevelsActivity.class);
                 startActivity(intent);
             }
         };

@@ -1,16 +1,46 @@
 package com.adeco.finddifferences;
 
-import android.support.v7.app.AppCompatActivity;
+import android.app.Activity;
+import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.GridView;
 
-public class LevelsActivity extends AppCompatActivity {
+import com.adeco.finddifferences.game.LevelImageAdapter;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+
+public class LevelsActivity extends Activity {
+    ArrayList<String> listPath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_levels);
+
+
+        AssetManager assetManager = getResources().getAssets();
+        try {
+            String[] files = assetManager.list("lvl_images");
+            listPath = new ArrayList<String>();
+            for (String strImageName : files) {
+                String pathAssets = "lvl_images" + File.separator
+                        + strImageName;
+                listPath.add(pathAssets);
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+
+
+        GridView gridview = (GridView) findViewById(R.id.gridView);
+        gridview.setAdapter(new LevelImageAdapter(this, listPath));
     }
 
     @Override

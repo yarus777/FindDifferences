@@ -22,7 +22,7 @@ public class TouchManager implements Touchable, Drawable {
     private DifferencePoint[] points;
 
     private List<AbstractPoint> diffs;
-    private List<AbstractPoint> misses;
+    private List<WrongPoint> misses;
     private StatisticHandler[] statisticHandlers;
     private StatisticData statistics;
     private DifferenceFoundHandler[] differenceFoundHandlers;
@@ -74,7 +74,7 @@ public class TouchManager implements Touchable, Drawable {
     public void draw(Canvas canvas) {
         top.draw(canvas, diffs);
         bottom.draw(canvas, diffs);
-        for(AbstractPoint point: misses){
+        for(WrongPoint point: misses){
             point.draw(canvas);
         }
     }

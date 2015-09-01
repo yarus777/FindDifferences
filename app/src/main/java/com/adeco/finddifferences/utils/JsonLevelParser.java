@@ -34,7 +34,7 @@ public class JsonLevelParser implements LevelParser {
                 JSONObject levelJson = levelsArray.getJSONObject(i);
                 String image1 = levelJson.getString("image1");
                 String image2 = levelJson.getString("image2");
-                JSONArray difArray = levelJson.getJSONArray("differences");
+                JSONArray difArray = levelJson.getJSONArray("diffs");
                 DifferencePoint[] diffs = new DifferencePoint[difArray.length()];
                 for (int j = 0; j < difArray.length(); j++) {
                     JSONObject difJson = difArray.getJSONObject(j);
