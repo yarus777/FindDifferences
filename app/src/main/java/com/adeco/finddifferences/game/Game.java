@@ -93,7 +93,6 @@ public class Game extends Application implements Drawable, Touchable, Destroyabl
         img1 = Bitmap.createScaledBitmap(img1raw, width, height, false);
         img2 = Bitmap.createScaledBitmap(img2raw, width, height, false);
 
-
         DifferencePoint[] diffs = level.getDiffs();
         DifferencePoint[] scaledDiffs = new DifferencePoint[diffs.length];
         for (int i = 0; i < diffs.length; i++) {

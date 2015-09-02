@@ -27,7 +27,7 @@ public class StateController implements StatisticHandler {
             onStateChanged(GameState.Lose);
         }
         else if (data.getDifferencesFound()==5 && data.getMovesTaken()<=10) {
-            if (levelStorage.goToNextLevel()) {
+            if (levelStorage.isNextLevelExists()) {
                 onStateChanged(GameState.Win);
             }
             else onStateChanged(GameState.Completed);

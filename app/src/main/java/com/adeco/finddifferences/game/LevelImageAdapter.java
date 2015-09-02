@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
 import com.adeco.finddifferences.R;
+import com.adeco.finddifferences.game.levels.Level;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -48,28 +50,25 @@ public class LevelImageAdapter extends BaseAdapter{
         View grid;
 
         if (convertView == null) {
-            grid = new View(context);
+            //grid = new View(context);
             LayoutInflater inflater = (LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
             grid = inflater.inflate(R.layout.cellgrid, parent, false);
         } else {
             grid = (View) convertView;
         }
 
-        ImageView star_1 = (ImageView) grid.findViewById(R.id.star_1);
-        ImageView star_2 = (ImageView) grid.findViewById(R.id.star_2);
-        ImageView star_3 = (ImageView) grid.findViewById(R.id.star_3);
+        ImageView[] stars = new ImageView[Level.MAX_STARS_COUNT];
+        stars[0] = (ImageView) grid.findViewById(R.id.star_1);
+        stars[1] = (ImageView) grid.findViewById(R.id.star_2);
+        stars[2] = (ImageView) grid.findViewById(R.id.star_3);
 
-        if (stars_num.get(position) == 3) {
-            star_1.setImageResource(R.drawable.starfull);
-            star_2.setImageResource(R.drawable.starfull);
-            star_3.setImageResource(R.drawable.starfull);
+        int starsCount = stars_num.get(position);
+        for(int i=0; i<Level.MAX_STARS_COUNT; i++){
+            if(i<starsCount){
+                stars[i].setImageResource(R.drawable.starfull);
+            }
         }
-        else if (stars_num.get(position) == 2) {
-            star_1.setImageResource(R.drawable.starfull);
-            star_2.setImageResource(R.drawable.starfull);
-        }
-        else if (stars_num.get(position) == 1)
-            star_1.setImageResource(R.drawable.starfull);
+
         AssetManager assetManager = context.getResources().getAssets();
 
         ImageView imageView = (ImageView) grid.findViewById(R.id.level_img);
@@ -82,7 +81,7 @@ public class LevelImageAdapter extends BaseAdapter{
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        Log.d("MY_TAG", position + ": " + stars_num.get(position));
         return grid;
     }
 

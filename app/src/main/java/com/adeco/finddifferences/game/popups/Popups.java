@@ -24,6 +24,7 @@ import com.adeco.finddifferences.game.states.StateController;
 
 public class Popups implements PopupController {
 
+    private final Intent intent;
     private Context context;
     private TimeCounter timeCounter;
     private Game game;
@@ -91,7 +92,8 @@ public class Popups implements PopupController {
             @Override
             public void onClick(View v) {
                 alert.dismiss();
-                Intent intent = new Intent(context, GameActivity.class);
+                game.getLevelStorage().goToNextLevel();
+                //Intent intent = new Intent(context, GameActivity.class);
                 context.startActivity(intent);
             }
         });
@@ -113,8 +115,7 @@ public class Popups implements PopupController {
             public void onClick(View v)
             {
                 alert.dismiss();
-                Intent intent = new Intent(context, GameActivity.class);
-                game.getLevelStorage().restartLevel();
+                //Intent intent = new Intent(context, GameActivity.class);
                 context.startActivity(intent);
             }
         });
@@ -210,9 +211,10 @@ public class Popups implements PopupController {
 
     }
 
-    public Popups(Context context, TimeCounter timeCounter, Game applicationContext) {
+    public Popups(Context context, TimeCounter timeCounter, Game applicationContext, Intent intent) {
         this.context = context;
         this.timeCounter = timeCounter;
         this.game = applicationContext;
+        this.intent = intent;
     }
 }

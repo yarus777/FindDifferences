@@ -4,6 +4,7 @@ import com.adeco.finddifferences.game.logic.points.DifferencePoint;
 
 
 public class Level {
+    public static final int MAX_STARS_COUNT = 3;
     private String img1;
     private String img2;
     private DifferencePoint[] diffs;
@@ -29,13 +30,15 @@ public class Level {
         return diffs;
     }
 
-    public int getNumber(){
+    public Integer getNumber(){
         return number;
     }
 
     public int getStarsNum() {return starsNum;}
 
     public void setStarsNum(int starsNum) {
-        this.starsNum = starsNum;
+        if(starsNum > this.starsNum){
+            this.starsNum = starsNum;
+        }
     }
 }

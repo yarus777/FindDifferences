@@ -73,7 +73,7 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
         right_touches.setTypeface(tf);
         timer.setTypeface(tf);
 
-        popupController = new Popups(this, this, (Game) getApplicationContext() );
+        popupController = new Popups(this, this, (Game) getApplicationContext(), getIntent());
 
         gameView = (GameView) findViewById(R.id.canvas);
         gameView.init(this, this, popupController, this);

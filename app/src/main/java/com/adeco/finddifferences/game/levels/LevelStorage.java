@@ -13,11 +13,14 @@ import com.adeco.finddifferences.utils.JsonLevelParser;
 import com.adeco.finddifferences.utils.XmlLevelParser;
 import com.adeco.finddifferences.utils.LevelParser;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 
 public class LevelStorage implements Destroyable, GameStateHandler{
     private final static String DATA_FILE = "levels.json";
     private final static String LEVEL_KEY = "current_level";
-    public Level[] levels;
+    private Level[] levels;
     private int currentLevel;
     private LevelParser levelParser;
     private SharedPreferences prefs;
@@ -37,6 +40,12 @@ public class LevelStorage implements Destroyable, GameStateHandler{
             return;
         }
         levels = levelParser.GetLevels(assetManager, DATA_FILE);
+        Arrays.sort(levels, new Comparator<Level>() {
+            @Override
+            public int compare(Level level, Level level2) {
+                return level.getNumber().compareTo(level2.getNumber());
+            }
+        });
         currentLevel = prefs.getInt(LEVEL_KEY, 0);
         loaded = true;
     }
@@ -50,20 +59,20 @@ public class LevelStorage implements Destroyable, GameStateHandler{
     }
 
     public boolean goToNextLevel() {
-        if (currentLevel < levels.length - 1) {
+        if (isNextLevelExists()) {
             currentLevel++;
             return true;
         }
         return false;
     }
 
-    public void resetLevel() {
-        currentLevel = 0;
+    public boolean isNextLevelExists(){
+        return currentLevel < levels.length - 1;
     }
 
-    public void restartLevel() {
-        currentLevel = currentLevel - 1;
-    }
+    /*public void resetLevel() {
+        currentLevel = 0;
+    }*/
 
     @Override
     public void onDestroy() {
@@ -74,7 +83,7 @@ public class LevelStorage implements Destroyable, GameStateHandler{
 
     @Override
     public void onGameStateChanged(StateController.GameState state) {
-        if ((state == StateController.GameState.Win)) {
+        if (state == StateController.GameState.Win || state == StateController.GameState.Completed) {
             getCurrentLevel().setStarsNum(scoreController.getStarsCount());
             //Log.d("MY_TAG", "stars"+getCurrentLevel().getStarsNum()+"level"+currentLevel);
         }
@@ -82,5 +91,13 @@ public class LevelStorage implements Destroyable, GameStateHandler{
 
     public void setScoreController(ScoreController scoreController) {
         this.scoreController = scoreController;
+    }
+
+    public int getLevelsCount(){
+        return levels.length;
+    }
+
+    public Level getLevel(int i) {
+        return levels[i];
     }
 }

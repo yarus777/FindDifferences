@@ -13,6 +13,7 @@ import android.widget.GridView;
 import com.adeco.finddifferences.game.Game;
 import com.adeco.finddifferences.game.LevelImageAdapter;
 import com.adeco.finddifferences.game.levels.Level;
+import com.adeco.finddifferences.game.levels.LevelStorage;
 
 
 import java.util.ArrayList;
@@ -28,14 +29,12 @@ public class LevelsActivity extends Activity {
 
         listPath = new ArrayList<String>();
         List<Integer> stars = new ArrayList<Integer>();
-        for (Level level: ((Game) getApplicationContext()).getLevelStorage().levels) {
+        LevelStorage lvlStorage = ((Game) getApplicationContext()).getLevelStorage();
+        for (int i=0; i<lvlStorage.getLevelsCount(); i++) {
+            Level level = lvlStorage.getLevel(i);
             listPath.add(level.getImg1());
             stars.add(level.getStarsNum());
         }
-
-
-
-
 
         GridView gridview = (GridView) findViewById(R.id.gridView);
         gridview.setAdapter(new LevelImageAdapter(this, listPath, stars));
