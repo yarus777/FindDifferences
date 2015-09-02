@@ -68,7 +68,7 @@ public class LevelImageAdapter extends BaseAdapter{
             star_1.setImageResource(R.drawable.starfull);
             star_2.setImageResource(R.drawable.starfull);
         }
-        else
+        else if (stars_num.get(position) == 1)
             star_1.setImageResource(R.drawable.starfull);
         AssetManager assetManager = context.getResources().getAssets();
 
