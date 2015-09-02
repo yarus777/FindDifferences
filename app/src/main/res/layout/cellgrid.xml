@@ -10,9 +10,31 @@
         android:layout_height="100dp"
         />
 
-    <TextView
-        android:id="@+id/textpart"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal">
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:id="@+id/star_1"
+            android:background="@drawable/starempty"
+            android:layout_marginRight="5dp" />
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:id="@+id/star_2"
+            android:background="@drawable/starempty"/>
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:id="@+id/star_3"
+            android:background="@drawable/starempty"
+            android:layout_marginLeft="5dp" />
+    </LinearLayout>
 
 </LinearLayout>

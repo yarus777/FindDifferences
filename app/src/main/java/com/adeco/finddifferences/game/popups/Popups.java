@@ -57,7 +57,7 @@ public class Popups implements PopupController {
         Button menu_go_btn = (Button) view.findViewById(R.id.menu_go_btn);
         Button restart_lvl_btn = (Button) view.findViewById(R.id.restart_lvl);
         TextView time_txt = (TextView) view.findViewById(R.id.lvl_time);
-        ImageView star1 = (ImageView) view.findViewById(R.id.star1);
+
         ImageView star2 = (ImageView) view.findViewById(R.id.star2);
         ImageView star3 = (ImageView) view.findViewById(R.id.star3);
         int starsCount = game.getScoreController().getStarsCount();

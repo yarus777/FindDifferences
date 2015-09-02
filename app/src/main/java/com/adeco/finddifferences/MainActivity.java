@@ -40,9 +40,11 @@ public class MainActivity extends Activity {
         OnClickListener onClickStartBtn = new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, GameActivity.class);
-                ((Game) getApplicationContext()).getLevelStorage().resetLevel();
+                Intent intent = new Intent(MainActivity.this, LevelsActivity.class);
                 startActivity(intent);
+                //Intent intent = new Intent(MainActivity.this, GameActivity.class);
+                //((Game) getApplicationContext()).getLevelStorage().resetLevel();
+                //startActivity(intent);
             }
         };
 
@@ -50,11 +52,10 @@ public class MainActivity extends Activity {
         OnClickListener onClickResumeBtn = new OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent intent = new Intent(MainActivity.this, GameActivity.class);
-                //startActivity(intent);
-
-                Intent intent = new Intent(MainActivity.this, LevelsActivity.class);
+                Intent intent = new Intent(MainActivity.this, GameActivity.class);
                 startActivity(intent);
+
+
             }
         };
         resumeGameBtn.setOnClickListener(onClickResumeBtn);

@@ -1,7 +1,6 @@
 package com.adeco.finddifferences.game.states;
 
-import com.adeco.finddifferences.game.Game;
-import com.adeco.finddifferences.game.levels.Level;
+
 import com.adeco.finddifferences.game.levels.LevelStorage;
 import com.adeco.finddifferences.game.statistics.StatisticData;
 import com.adeco.finddifferences.game.statistics.StatisticHandler;

@@ -8,6 +8,7 @@ public class Level {
     private String img2;
     private DifferencePoint[] diffs;
     private int number;
+    private int starsNum;
 
     public Level(int number, String img1, String img2, DifferencePoint[] diffs) {
         this.number = number;
@@ -30,5 +31,11 @@ public class Level {
 
     public int getNumber(){
         return number;
+    }
+
+    public int getStarsNum() {return starsNum;}
+
+    public void setStarsNum(int starsNum) {
+        this.starsNum = starsNum;
     }
 }

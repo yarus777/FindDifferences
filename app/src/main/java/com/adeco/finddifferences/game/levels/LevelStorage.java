@@ -6,18 +6,22 @@ import android.util.Log;
 
 import com.adeco.finddifferences.game.Game;
 import com.adeco.finddifferences.game.interfaces.Destroyable;
+import com.adeco.finddifferences.game.score.ScoreController;
+import com.adeco.finddifferences.game.states.GameStateHandler;
+import com.adeco.finddifferences.game.states.StateController;
 import com.adeco.finddifferences.utils.JsonLevelParser;
 import com.adeco.finddifferences.utils.XmlLevelParser;
 import com.adeco.finddifferences.utils.LevelParser;
 
 
-public class LevelStorage implements Destroyable {
+public class LevelStorage implements Destroyable, GameStateHandler{
     private final static String DATA_FILE = "levels.json";
     private final static String LEVEL_KEY = "current_level";
     public Level[] levels;
     private int currentLevel;
     private LevelParser levelParser;
     private SharedPreferences prefs;
+    private ScoreController scoreController;
 
     public LevelStorage(AssetManager assets, SharedPreferences prefs) {
         levelParser = new JsonLevelParser();
@@ -41,6 +45,10 @@ public class LevelStorage implements Destroyable {
         return levels[currentLevel];
     }
 
+    public void setCurrentLevel(int lvlnumber) {
+        currentLevel = lvlnumber;
+    }
+
     public boolean goToNextLevel() {
         if (currentLevel < levels.length - 1) {
             currentLevel++;
@@ -62,5 +70,17 @@ public class LevelStorage implements Destroyable {
         SharedPreferences.Editor editor = prefs.edit();
         editor.putInt(LEVEL_KEY, currentLevel);
         editor.commit();
+    }
+
+    @Override
+    public void onGameStateChanged(StateController.GameState state) {
+        if ((state == StateController.GameState.Win)) {
+            getCurrentLevel().setStarsNum(scoreController.getStarsCount());
+            //Log.d("MY_TAG", "stars"+getCurrentLevel().getStarsNum()+"level"+currentLevel);
+        }
+    }
+
+    public void setScoreController(ScoreController scoreController) {
+        this.scoreController = scoreController;
     }
 }

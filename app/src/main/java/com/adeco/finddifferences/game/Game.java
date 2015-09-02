@@ -65,7 +65,6 @@ public class Game extends Application implements Drawable, Touchable, Destroyabl
 
     private Bitmap img1;
     private Bitmap img2;
-    private Bitmap dif_img, wrong_img;
 
     private PictureLayer pictureLayer;
 
@@ -94,9 +93,6 @@ public class Game extends Application implements Drawable, Touchable, Destroyabl
         img1 = Bitmap.createScaledBitmap(img1raw, width, height, false);
         img2 = Bitmap.createScaledBitmap(img2raw, width, height, false);
 
-        Resources res = context.getResources();
-        dif_img = BitmapFactory.decodeResource(res, R.drawable.circle);
-        wrong_img = BitmapFactory.decodeResource(res, R.drawable.miss);
 
         DifferencePoint[] diffs = level.getDiffs();
         DifferencePoint[] scaledDiffs = new DifferencePoint[diffs.length];
@@ -109,8 +105,10 @@ public class Game extends Application implements Drawable, Touchable, Destroyabl
         stateController.addHandler(popupController);
 
         scoreController = new ScoreController(activity);
+        levelStorage.setScoreController(scoreController);
 
         pictureLayer = new PictureLayer(img1, img2, scaledDiffs, new StatisticHandler[]{statisticHandler, scoreController, stateController}, differenceHandlers);
+        stateController.addHandler(levelStorage);
 
         stateController.addHandler(pictureLayer);
 
@@ -137,12 +135,6 @@ public class Game extends Application implements Drawable, Touchable, Destroyabl
         return bitmap;
     }
 
-    public Bitmap getDifImg() {
-        return dif_img;
-    }
-
-    public Bitmap getWrongImg() {return wrong_img;}
-
     public Settings getSettings() {
         return settings;
     }
@@ -154,10 +146,6 @@ public class Game extends Application implements Drawable, Touchable, Destroyabl
 
     public LevelStorage getLevelStorage() {
         return levelStorage;
-    }
-
-    public SharedPreferences getPreferences() {
-        return preferences;
     }
 
     @Override
