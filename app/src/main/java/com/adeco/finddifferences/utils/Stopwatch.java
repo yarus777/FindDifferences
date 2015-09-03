@@ -1,4 +1,4 @@
-package com.adeco.finddifferences;
+package com.adeco.finddifferences.utils;
 
 
 public class Stopwatch {

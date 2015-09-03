@@ -5,21 +5,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Typeface;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.SystemClock;
 import android.os.Vibrator;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Chronometer;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.adeco.finddifferences.game.Game;
 import com.adeco.finddifferences.game.interfaces.DifferenceFoundHandler;
@@ -29,10 +25,9 @@ import com.adeco.finddifferences.game.states.GameStateHandler;
 import com.adeco.finddifferences.game.states.StateController;
 import com.adeco.finddifferences.game.statistics.StatisticData;
 import com.adeco.finddifferences.game.statistics.StatisticHandler;
+import com.adeco.finddifferences.utils.Stopwatch;
 
 import java.io.IOException;
-import java.util.Calendar;
-import java.util.TimeZone;
 
 public class GameActivity extends Activity implements StatisticHandler, DifferenceFoundHandler, GameStateHandler, TimeCounter {
 
@@ -45,6 +40,7 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
     private Popups popupController;
     protected PowerManager.WakeLock mWakeLock;
     private MediaPlayer mp;
+    private long timeWhenStopped = 0;
 
 
     @Override
@@ -78,9 +74,14 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
         gameView = (GameView) findViewById(R.id.canvas);
         gameView.init(this, this, popupController, this);
 
-        if (((Game) getApplicationContext()).getSettings().Music)
+
+        if (((Game) getApplicationContext()).getSettings().Music) {
             playMusic();
+        }
+
+
     }
+
 
     public void playMusic() {
         AssetFileDescriptor afd = null;
@@ -170,9 +171,12 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
 
     @Override
     protected void onStop() {
+        timeWhenStopped = timer.getBase() - SystemClock.elapsedRealtime();
+        timer.stop();
+        stopWatch.pause();
         super.onStop();
         if (mp!=null)
-        mp.stop();
+            mp.pause();
         ((Game) getApplicationContext()).onDestroy();
     }
 
@@ -180,17 +184,21 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
     public void onBackPressed() {
         super.onBackPressed();
         if (mp!=null)
-        mp.stop();
+            mp.stop();
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
     @Override
     protected void onResume() {
+        stopWatch.resume();
+        timer.setBase(SystemClock.elapsedRealtime() + timeWhenStopped);
+        timer.start();
         super.onResume();
         if (mp!=null)
-        mp.start();
+            mp.start();
     }
+
 
     @Override
     public void onGameStateChanged(StateController.GameState state) {
@@ -203,6 +211,9 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
         {
             stopWatch.stop();
             timer.stop();
+            if (mp!=null) {
+                mp.pause();
+            }
             }
     }
 
@@ -214,7 +225,6 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
     @Override
     public int getTimeSinceStart() {
         int seconds = (int) (stopWatch.getElapsedTimeSecs()+stopWatch.getElapsedTimeMin()*60);
-        Log.d("MyTag","Seconds" + seconds);
         return seconds;
     }
 

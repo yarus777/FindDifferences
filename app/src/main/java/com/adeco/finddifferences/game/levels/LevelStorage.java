@@ -13,6 +13,10 @@ import com.adeco.finddifferences.utils.JsonLevelParser;
 import com.adeco.finddifferences.utils.XmlLevelParser;
 import com.adeco.finddifferences.utils.LevelParser;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Arrays;
 import java.util.Comparator;
 
@@ -31,6 +35,7 @@ public class LevelStorage implements Destroyable, GameStateHandler{
         this.prefs = prefs;
         Log.d("MY_TAG", prefs + "");
         load(assets);
+
     }
 
     private boolean loaded = false;
@@ -47,7 +52,25 @@ public class LevelStorage implements Destroyable, GameStateHandler{
             }
         });
         currentLevel = prefs.getInt(LEVEL_KEY, 0);
+
+        String json_str = prefs.getString("Progress", "");
+        try {
+            JSONObject obj = new JSONObject(json_str);
+            JSONArray levelsArray = obj.getJSONArray("levels");
+            for(int i=0; i<levelsArray.length(); i++){
+                JSONObject levelItem = levelsArray.getJSONObject(i);
+                int number = levelItem.getInt("number");
+                int stars = levelItem.getInt("stars");
+                getLevel(number).setStarsNum(stars);
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         loaded = true;
+
+
     }
 
     public Level getCurrentLevel() {
@@ -78,6 +101,22 @@ public class LevelStorage implements Destroyable, GameStateHandler{
     public void onDestroy() {
         SharedPreferences.Editor editor = prefs.edit();
         editor.putInt(LEVEL_KEY, currentLevel);
+
+        JSONArray array = new JSONArray();
+        JSONObject res = new JSONObject();
+        try {
+            for (Level level: this.levels) {
+                JSONObject stars = new JSONObject();
+                stars.put("number", level.getNumber());
+                stars.put("stars",  level.getStarsNum());
+                array.put(stars);
+            }
+            res.put("levels",array);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Log.d("MY_TAG", "JSON"+res.toString());
+        editor.putString("Progress", res.toString());
         editor.commit();
     }
 
@@ -100,4 +139,5 @@ public class LevelStorage implements Destroyable, GameStateHandler{
     public Level getLevel(int i) {
         return levels[i];
     }
+
 }

@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
+import android.util.Log;
 
 public abstract class BitmapPoint extends AbstractPoint {
 	private Bitmap bitmap;
@@ -17,6 +18,7 @@ public abstract class BitmapPoint extends AbstractPoint {
         this.bitmap = Bitmap.createScaledBitmap(img, radius*2, radius*2, false);
         this.width = bitmap.getWidth();
         this.height = bitmap.getHeight();
+        Log.d("MY_TAG", "Width"+width+"Height"+height);
     }
 
 	@Override

@@ -7,7 +7,7 @@ import android.graphics.Paint;
 public class Consts {
     public final static Paint difPaint;
     public final static Paint wrongPaint;
-    public static final int wrongRadius = 28;
+    private static final int wrongRadius = 28;
 
     static {
         difPaint = new Paint();
@@ -19,5 +19,15 @@ public class Consts {
         wrongPaint.setColor(Color.RED);
         wrongPaint.setStyle(Paint.Style.STROKE);
         wrongPaint.setStrokeWidth(4);
+    }
+
+    private static double scalefactor = 1;
+
+    public static void applyScale(double scaleFactor) {
+        scalefactor = scaleFactor;
+    }
+
+    public static int getWrongRadius() {
+        return (int) (scalefactor*wrongRadius);
     }
 }

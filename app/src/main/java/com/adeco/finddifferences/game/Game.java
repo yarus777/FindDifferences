@@ -3,11 +3,13 @@ package com.adeco.finddifferences.game;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.media.MediaPlayer;
 import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
@@ -50,6 +52,7 @@ public class Game extends Application implements Drawable, Touchable, Destroyabl
         levelStarted = new LevelStarted();
         Graphics.init(assetManager);
     }
+
 
    /* public static Game getInstance() {
         if (instance == null) {
@@ -99,6 +102,7 @@ public class Game extends Application implements Drawable, Touchable, Destroyabl
             scaledDiffs[i] = diffs[i].scale(scaleFactor);
         }
 
+        Consts.applyScale(scaleFactor);
 
         StateController stateController = new StateController(levelStorage);
         stateController.addHandler(popupController);
@@ -115,7 +119,9 @@ public class Game extends Application implements Drawable, Touchable, Destroyabl
         stateController.addHandler(activity);
 
         stateController.start();
+
     }
+
 
     public void draw(Canvas canvas) {
         pictureLayer.draw(canvas);

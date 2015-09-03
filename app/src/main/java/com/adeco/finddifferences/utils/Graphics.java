@@ -13,7 +13,7 @@ public class Graphics {
     public static Bitmap difImg;
 
     public static void init(AssetManager assetManager) {
-        // todo присвоить полям картинки из ассетов
+
         wrongImg = Game.getBitmapFromAsset(assetManager, WRONG_IMG_PATH);
         difImg = Game.getBitmapFromAsset(assetManager, DIFF_IMG_PATH);
     }
