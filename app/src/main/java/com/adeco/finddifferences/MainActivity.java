@@ -3,6 +3,7 @@ package com.adeco.finddifferences;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -23,7 +24,9 @@ import com.adeco.finddifferences.game.Game;
 
 public class MainActivity extends Activity {
 
-    Button startGameBtn, resumeGameBtn, settingsBtn;
+    Button startGameBtn, resumeGameBtn, settingsBtn, fullVersionBtn;
+    SharedPreferences sPref;
+    int entries = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +36,15 @@ public class MainActivity extends Activity {
         startGameBtn = (Button) findViewById(R.id.startGame);
         resumeGameBtn = (Button) findViewById(R.id.resumeGame);
         settingsBtn = (Button) findViewById(R.id.settings);
+        fullVersionBtn = (Button) findViewById(R.id.full_version);
+
+
+
+
+        loadEntries();
+        Log.d("Entries",""+ sPref.getInt("Entries",0));
+
+
 
 
         OnClickListener onClickSettingBtn = new OnClickListener() {
@@ -157,4 +169,29 @@ public class MainActivity extends Activity {
         startActivity(intent);
     }
 
+    @Override
+    protected void onDestroy() {
+        saveEntries();
+        Log.d("Entries_destroy", "" + sPref.getInt("Entries", 0));
+        super.onDestroy();
+    }
+
+    public void saveEntries() {
+        entries++;
+        sPref = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor ed = sPref.edit();
+        ed.putInt("Entries", entries);
+        ed.commit();
+
+    }
+
+
+    public void loadEntries() {
+        sPref = getPreferences(MODE_PRIVATE);
+        entries = sPref.getInt("Entries",0);
+        if ( entries >= 2 ) {
+            fullVersionBtn.setVisibility(View.VISIBLE);
+        }
+
+    }
 }

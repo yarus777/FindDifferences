@@ -25,9 +25,9 @@ public class ScoreController implements StatisticHandler{
     public int getStarsCount() {
         int time = timeCounter.getTimeSinceStart();
         Log.d("MyTag", "Time "+ time+"tries "+tries);
-        if (time <=20 && tries == 5)
+        if (time <=20 && tries == 0)
             return 3;
-        else if (time <=40 && tries <=7)
+        else if (time <=40 && tries <=2)
             return 2;
         else return 1;
     }
