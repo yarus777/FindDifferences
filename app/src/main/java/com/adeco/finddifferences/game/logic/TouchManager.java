@@ -61,8 +61,9 @@ public class TouchManager implements Touchable, Drawable {
                     misses.add(wrongPoint);
                     for(DifferenceFoundHandler handler: differenceFoundHandlers)
                         handler.onWrongTouch();
+                    statistics.onMove();
                 }
-                statistics.onMove();
+                //statistics.onMove();
                 for (StatisticHandler handler : statisticHandlers) {
                     handler.handleStatistics(statistics);
                 }

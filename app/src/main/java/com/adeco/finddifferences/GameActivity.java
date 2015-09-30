@@ -170,7 +170,7 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
         String moves = String.valueOf(data.getMovesTaken());
 
         right_touches.setText(diffs + "/5");
-        tries.setText(moves + "/10");
+        tries.setText(moves + "/5");
     }
 
     @Override

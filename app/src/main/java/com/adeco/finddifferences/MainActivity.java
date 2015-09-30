@@ -49,7 +49,6 @@ public class MainActivity extends Activity {
 
                 Button fullVersionBtn;
                 fullVersionBtn = (Button) alert.findViewById(R.id.full_version_btn);
-                Log.d("Dialog", "button");
                 View.OnClickListener onClickFullVersionBtn = new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

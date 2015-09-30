@@ -23,10 +23,10 @@ public class StateController implements StatisticHandler {
     @Override
     public void handleStatistics(StatisticData data) {
 
-        if (data.getDifferencesFound() < 5 && data.getMovesTaken() == 10) {
+        if (data.getDifferencesFound() < 5 && data.getMovesTaken() == 5) {
             onStateChanged(GameState.Lose);
         }
-        else if (data.getDifferencesFound()==5 && data.getMovesTaken()<=10) {
+        else if (data.getDifferencesFound()==5 && data.getMovesTaken()<=5) {
             if (levelStorage.isNextLevelExists()) {
                 onStateChanged(GameState.Win);
             }

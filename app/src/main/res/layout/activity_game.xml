@@ -65,7 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/text_color"
-                android:text="0/10"
+                android:text="0/5"
                 android:id="@+id/touches"
                 android:textSize="@dimen/text_size"
                 android:gravity="right"
