@@ -3,17 +3,20 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    android:gravity="center_vertical|center_horizontal">
 
 
 
     <RelativeLayout
         android:orientation="vertical"
-        android:layout_width="match_parent"
+        android:layout_width="260dp"
         android:layout_height="181dp"
         android:background="@drawable/win_bg"
         android:weightSum="1"
-        android:layout_weight="0.13">
+        android:layout_weight="0.50">
 
 
         <TextView
@@ -25,9 +28,10 @@
             android:textColor="#000"
             android:textAlignment="center"
             android:gravity="center"
-            android:layout_above="@+id/lvl_time"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="10dp">
+            android:textSize="20dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
         </TextView>
 
         <TextView
@@ -36,109 +40,89 @@
             android:text="New Text"
             android:textColor="#000"
             android:id="@+id/lvl_time"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="37dp"
             android:layout_above="@+id/linearLayout"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:textSize="20dp" />
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="false"
-            android:layout_alignParentStart="true"
+            android:gravity="center|bottom"
+            android:id="@+id/linearLayout"
+            android:layout_marginBottom="20dp"
             android:layout_alignParentBottom="true"
-            android:gravity="bottom"
-            android:id="@+id/linearLayout">
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
 
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/menu_go_txt"
-                android:background="@drawable/selector_button"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/menu_btn_selector"
                 android:id="@+id/menu_go_btn"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_weight="0.3"
-                android:layout_marginLeft="3dp"
-                android:layout_marginRight="2dp"
+                android:layout_marginRight="20dp"
                 android:layout_marginBottom="2dp" />
 
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/selector_button"
-                android:text="@string/next_lvl_txt"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/next_btn_selector"
                 android:id="@+id/next_lvl_btn"
                 android:gravity="center"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:layout_weight="0.3"
                 android:layout_marginBottom="2dp" />
 
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/restart_lvl_txt"
-                android:background="@drawable/selector_button"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/replay_btn_selector"
                 android:id="@+id/restart_lvl"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:layout_weight="0.3"
-                android:layout_marginRight="3dp"
-                android:layout_marginLeft="2dp"
+                android:layout_marginLeft="20dp"
                 android:layout_marginBottom="2dp"
                 android:textAlignment="center" />
         </LinearLayout>
 
-        <RelativeLayout
+        <LinearLayout
             android:orientation="horizontal"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_above="@+id/complete_txt"
-            android:layout_marginBottom="10dp">
+            android:layout_marginTop="47dp"
+            android:id="@+id/linearLayout2"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/star3"
-                android:gravity="center"
-                android:background="@drawable/starfull"
-                android:layout_alignTop="@+id/star2"
-                android:layout_toRightOf="@+id/star2"
-                android:layout_toEndOf="@+id/star2"
-                android:layout_marginLeft="5dp"
-                android:layout_alignParentTop="false"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="5dp" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:id="@+id/star1"
                 android:gravity="center"
-                android:background="@drawable/starfull"
-                android:layout_alignTop="@+id/star2"
-                android:layout_toLeftOf="@+id/star2"
-                android:layout_toStartOf="@+id/star2"
-                android:layout_marginRight="5dp"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="5dp" />
+                android:background="@drawable/starfull" />
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:id="@+id/star2"
                 android:gravity="center"
                 android:background="@drawable/starfull"
-                android:layout_marginTop="5dp"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="5dp" />
-        </RelativeLayout>
+                android:layout_marginLeft="5dp" />
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/star3"
+                android:gravity="center"
+                android:background="@drawable/starfull"
+                android:layout_marginLeft="5dp" />
+
+        </LinearLayout>
 
     </RelativeLayout>
 

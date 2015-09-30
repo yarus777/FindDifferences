@@ -1,0 +1,47 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="@drawable/bg"
+    tools:context=".MainActivity"
+    android:gravity="center">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <Button
+            android:layout_width="394dp"
+            android:layout_height="104dp"
+            android:id="@+id/startGame"
+            android:background="@drawable/start_game_btn_selector" />
+
+        <Button
+            android:layout_width="394dp"
+            android:layout_height="104dp"
+            android:id="@+id/resumeGame"
+            android:background="@drawable/resume_game_btn_selector"
+            android:layout_marginTop="21dp"/>
+
+        <Button
+            android:layout_width="394dp"
+            android:layout_height="104dp"
+            android:id="@+id/settings"
+            android:background="@drawable/settings_btn_selector"
+            android:layout_marginTop="21dp" />
+
+        <Button
+            android:layout_width="394dp"
+            android:layout_height="104dp"
+            android:id="@+id/full_version"
+            android:background="@drawable/full_version_btn_selector"
+            android:layout_marginTop="21dp"
+            android:visibility="invisible"/>
+    </LinearLayout>
+
+
+</LinearLayout>

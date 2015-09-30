@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp">
 
     <RelativeLayout
         android:orientation="vertical"
@@ -15,32 +17,28 @@
         <TextView
             android:id="@+id/complete_txt"
             android:layout_width="251dp"
-            android:layout_height="74dp"
+            android:layout_height="wrap_content"
             android:text="@string/last_level_win"
             android:layout_gravity="center_horizontal"
             android:textColor="#000"
             android:textAlignment="center"
             android:gravity="center_horizontal"
-            android:layout_weight="0.71"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_above="@+id/close_dlg_btn"
             android:layout_alignParentTop="true">
         </TextView>
 
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/selector_button"
-            android:text="@string/full_version_btn"
+            android:layout_width="197dp"
+            android:layout_height="52dp"
+            android:background="@drawable/full_version_btn_selector"
             android:id="@+id/close_dlg_btn"
             android:gravity="center"
             android:layout_gravity="bottom"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_centerHorizontal="true" />
     </RelativeLayout>
 
 </LinearLayout>

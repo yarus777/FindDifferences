@@ -1,14 +1,22 @@
 package com.adeco.finddifferences;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 
 import com.adeco.finddifferences.game.Game;
 
@@ -30,8 +38,67 @@ public class MainActivity extends Activity {
         OnClickListener onClickSettingBtn = new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
-                startActivity(intent);
+                //Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+                //startActivity(intent);
+
+                Dialog alert = new Dialog(MainActivity.this);
+                alert.setCanceledOnTouchOutside(false);
+                alert.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                alert.setContentView(R.layout.dialog_settings);
+                alert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+                Button fullVersionBtn;
+                fullVersionBtn = (Button) alert.findViewById(R.id.full_version_btn);
+                Log.d("Dialog", "button");
+                View.OnClickListener onClickFullVersionBtn = new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(Intent.ACTION_VIEW);
+                        String appPackageName = getResources().getString(R.string.full_version_package);
+                        intent.setData(Uri.parse("market://details?id=" + appPackageName));
+                        startActivity(intent);
+                    }
+                };
+
+                fullVersionBtn.setOnClickListener(onClickFullVersionBtn);
+
+                final CheckBox vibro_cb, music_cb, sound_cb;
+
+                vibro_cb = (CheckBox) alert.findViewById(R.id.vibro_cb);
+                music_cb = (CheckBox) alert.findViewById(R.id.music_cb);
+                sound_cb = (CheckBox) alert.findViewById(R.id.sound_cb);
+
+                vibro_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        ((Game) getApplicationContext()).getSettings().Vibro = vibro_cb.isChecked();
+                    }
+                });
+
+
+                music_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        ((Game) getApplicationContext()).getSettings().Music = music_cb.isChecked();
+                    }
+                });
+
+
+                sound_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        ((Game) getApplicationContext()).getSettings().Sound = sound_cb.isChecked();
+                    }
+                });
+
+                WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+                lp.copyFrom(alert.getWindow().getAttributes());
+                lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+                lp.height = WindowManager.LayoutParams.MATCH_PARENT;
+
+                alert.show();
+
+                alert.getWindow().setAttributes(lp);
             }
         };
 
@@ -42,9 +109,7 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, LevelsActivity.class);
                 startActivity(intent);
-                //Intent intent = new Intent(MainActivity.this, GameActivity.class);
-                //((Game) getApplicationContext()).getLevelStorage().resetLevel();
-                //startActivity(intent);
+
             }
         };
 

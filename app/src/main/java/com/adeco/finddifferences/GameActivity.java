@@ -10,11 +10,15 @@ import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.SystemClock;
 import android.os.Vibrator;
+import android.util.Log;
+import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Chronometer;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.adeco.finddifferences.game.Game;
@@ -54,6 +58,11 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
         //this.mWakeLock.acquire();
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        WindowManager wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+        int width = display.getWidth();
+        int height = display.getHeight();
+        double scale = ((double)width)/height;
 
         stopWatch = new Stopwatch();
 
@@ -68,6 +77,19 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
         tries.setTypeface(tf);
         right_touches.setTypeface(tf);
         timer.setTypeface(tf);
+
+
+        if (scale < 0.75)
+        {
+            LinearLayout topPanel = (LinearLayout) findViewById(R.id.top_panel);
+            ViewGroup.LayoutParams params = topPanel.getLayoutParams();
+            params.height = 150;
+            tries.setTextSize(23);
+            tries_txt.setTextSize(23);
+            right_touches.setTextSize(23);
+            right_touches_txt.setTextSize(23);
+            timer.setTextSize(23);
+        }
 
         popupController = new Popups(this, this, (Game) getApplicationContext(), getIntent());
 
@@ -87,7 +109,7 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
         AssetFileDescriptor afd = null;
         mp = new MediaPlayer();
         try {
-            afd = getAssets().openFd("sounds/music.mp3");
+            afd = getAssets().openFd("sounds/music.ogg");
             mp.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
             mp.prepare();
         } catch (IOException e) {

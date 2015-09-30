@@ -15,7 +15,8 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="25dp"
-            android:weightSum="1">
+            android:weightSum="1"
+            android:id="@+id/top_panel">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -25,7 +26,7 @@
                 android:id="@+id/right_touches_txt"
                 android:gravity="left"
                 android:textSize="@dimen/text_size"
-                android:layout_gravity="left" />
+                android:layout_gravity="center_vertical|left" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -35,7 +36,7 @@
                 android:id="@+id/right_touches"
                 android:gravity="left"
                 android:textSize="@dimen/text_size"
-                android:layout_gravity="left" />
+                android:layout_gravity="center_vertical|left" />
 
             <Chronometer
                 android:layout_width="wrap_content"
@@ -45,7 +46,8 @@
                 android:gravity="center_horizontal"
                 android:layout_weight="1"
                 android:textSize="@dimen/text_size"
-                android:id="@+id/timer" />
+                android:id="@+id/timer"
+                android:layout_gravity="center_vertical" />
 
 
 
@@ -57,7 +59,7 @@
                 android:id="@+id/touches_txt"
                 android:gravity="right"
                 android:textSize="@dimen/text_size"
-                />
+                android:layout_gravity="center_vertical" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -66,7 +68,8 @@
                 android:text="0/10"
                 android:id="@+id/touches"
                 android:textSize="@dimen/text_size"
-                android:gravity="right" />
+                android:gravity="right"
+                android:layout_gravity="center_vertical" />
         </LinearLayout>
 
         <com.adeco.finddifferences.GameView
