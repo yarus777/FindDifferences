@@ -2,8 +2,8 @@
   "levels": [
     {
       "number": 0,
-      "image1": "lvl_images/0.jpg",
-      "image2": "lvl_images/0_a.jpg",
+      "image1": "lvl_images/4.jpg",
+      "image2": "lvl_images/4_a.jpg",
       "diffs": [
         {
           "x": 555,

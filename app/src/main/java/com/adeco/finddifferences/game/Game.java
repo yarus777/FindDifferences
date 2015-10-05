@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 
 import com.adeco.finddifferences.GameActivity;
 import com.adeco.finddifferences.R;
@@ -41,16 +42,24 @@ public class Game extends Application implements Drawable, Touchable, Destroyabl
     private AssetManager assetManager;
     private LevelStorage levelStorage;
     private SharedPreferences preferences;
+    int entries;
 
    @Override
    public  void onCreate() {
         assetManager = getAssets();
         preferences = this.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        Log.d("MY_TAG", "a " + assetManager + "p " + preferences);
         levelStorage = new LevelStorage(assetManager, preferences);
         settings = new Settings();
         levelStarted = new LevelStarted();
         Graphics.init(assetManager);
+
+       entries = preferences.getInt("Entries",0);
+       entries++;
+       SharedPreferences.Editor ed = preferences.edit();
+       ed.putInt("Entries", entries);
+       ed.commit();
+
+       Log.d("Game_lbl", "Game_create");
     }
 
 
@@ -90,11 +99,14 @@ public class Game extends Application implements Drawable, Touchable, Destroyabl
         int imgHeight = img1raw.getHeight();
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
+
+
         int width = display.getWidth();
         double scaleFactor = (double) width / imgWidth;
         int height = (int) (scaleFactor * imgHeight);
         img1 = Bitmap.createScaledBitmap(img1raw, width, height, false);
         img2 = Bitmap.createScaledBitmap(img2raw, width, height, false);
+
 
         DifferencePoint[] diffs = level.getDiffs();
         DifferencePoint[] scaledDiffs = new DifferencePoint[diffs.length];
@@ -119,6 +131,8 @@ public class Game extends Application implements Drawable, Touchable, Destroyabl
         stateController.addHandler(activity);
 
         stateController.start();
+
+        Log.d("Game_lbl", "Game_start");
 
     }
 
@@ -156,6 +170,7 @@ public class Game extends Application implements Drawable, Touchable, Destroyabl
     @Override
     public void onDestroy() {
         levelStorage.onDestroy();
+        Log.d("Game_lbl", "Game_destroy");
     }
 
     public PopupController getPopupController() {
@@ -165,4 +180,6 @@ public class Game extends Application implements Drawable, Touchable, Destroyabl
     public ScoreController getScoreController() {
         return scoreController;
     }
+
+    public int getEntries() {return entries;}
 }

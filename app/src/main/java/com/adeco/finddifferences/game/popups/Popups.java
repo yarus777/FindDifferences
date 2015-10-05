@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.adeco.finddifferences.LevelsActivity;
 import com.adeco.finddifferences.MainActivity;
 import com.adeco.finddifferences.R;
 import com.adeco.finddifferences.game.Game;
@@ -39,7 +40,7 @@ public class Popups implements PopupController {
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 dialog.cancel();
-                                Intent intent = new Intent(context, MainActivity.class);
+                                Intent intent = new Intent(context, LevelsActivity.class);
                                 context.startActivity(intent);
                             }
                         });
@@ -52,6 +53,7 @@ public class Popups implements PopupController {
     public void showWinPopup() {
         final Dialog alert = new Dialog(context);
         alert.setCanceledOnTouchOutside(false);
+        alert.setCancelable(false);
         alert.requestWindowFeature(Window.FEATURE_NO_TITLE);
         alert.setContentView(R.layout.dialog_win);
         alert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -182,6 +184,8 @@ public class Popups implements PopupController {
                         });*/
 
         final Dialog alert = new Dialog(context);
+        alert.setCanceledOnTouchOutside(false);
+        alert.setCancelable(false);
         alert.requestWindowFeature(Window.FEATURE_NO_TITLE);
         alert.setContentView(R.layout.dialog_complete);
         alert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -198,7 +202,17 @@ public class Popups implements PopupController {
                 alert.dismiss();
             }
         });
+
+
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(alert.getWindow().getAttributes());
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
+
+
         alert.show();
+
+        alert.getWindow().setAttributes(lp);
     }
 
     @Override

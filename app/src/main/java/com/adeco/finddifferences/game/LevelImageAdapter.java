@@ -23,6 +23,7 @@ public class LevelImageAdapter extends BaseAdapter{
     private Context context;
     private List<String> griRowItems;
     private List<Integer> stars_num;
+    ImageView shadow;
 
     public LevelImageAdapter(Context context, List<String> griRowItems, List<Integer> stars_num) {
         this.context = context;
@@ -62,12 +63,22 @@ public class LevelImageAdapter extends BaseAdapter{
         stars[1] = (ImageView) grid.findViewById(R.id.star_2);
         stars[2] = (ImageView) grid.findViewById(R.id.star_3);
 
+        shadow = (ImageView) grid.findViewById(R.id.shadow);
+
         int starsCount = stars_num.get(position);
         for(int i=0; i<Level.MAX_STARS_COUNT; i++){
             if(i<starsCount){
                 stars[i].setImageResource(R.drawable.starfull);
             }
+
         }
+
+        if (isEnabled(position))
+        {
+            shadow.setVisibility(View.INVISIBLE);
+        }
+
+
 
         AssetManager assetManager = context.getResources().getAssets();
 
@@ -83,6 +94,25 @@ public class LevelImageAdapter extends BaseAdapter{
         }
         Log.d("MY_TAG", position + ": " + stars_num.get(position));
         return grid;
+    }
+
+    @Override
+    public boolean areAllItemsEnabled() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled(int position) {
+        if (position == 0)
+        {
+            return true;
+        }
+        if (position > 0) {
+            if (stars_num.get(position-1) > 0) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

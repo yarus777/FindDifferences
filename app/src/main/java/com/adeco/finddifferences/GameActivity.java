@@ -79,7 +79,7 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
         timer.setTypeface(tf);
 
 
-        if (scale < 0.75)
+       /* if (scale < 0.75)
         {
             LinearLayout topPanel = (LinearLayout) findViewById(R.id.top_panel);
             ViewGroup.LayoutParams params = topPanel.getLayoutParams();
@@ -89,7 +89,7 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
             right_touches.setTextSize(23);
             right_touches_txt.setTextSize(23);
             timer.setTextSize(23);
-        }
+        }*/
 
         popupController = new Popups(this, this, (Game) getApplicationContext(), getIntent());
 
@@ -207,7 +207,7 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
         super.onBackPressed();
         if (mp!=null)
             mp.stop();
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, LevelsActivity.class);
         startActivity(intent);
     }
 

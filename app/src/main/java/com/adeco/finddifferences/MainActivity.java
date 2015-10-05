@@ -24,7 +24,7 @@ import com.adeco.finddifferences.game.Game;
 
 public class MainActivity extends Activity {
 
-    Button startGameBtn, resumeGameBtn, settingsBtn, fullVersionBtn;
+    Button startGameBtn, resumeGameBtn, settingsBtn, fullVersion;
     SharedPreferences sPref;
     int entries = 0;
 
@@ -36,13 +36,27 @@ public class MainActivity extends Activity {
         startGameBtn = (Button) findViewById(R.id.startGame);
         resumeGameBtn = (Button) findViewById(R.id.resumeGame);
         settingsBtn = (Button) findViewById(R.id.settings);
-        fullVersionBtn = (Button) findViewById(R.id.full_version);
+        fullVersion = (Button) findViewById(R.id.full_version);
+
+        if ( ((Game) getApplicationContext()).getEntries() >= 2 ) {
+            fullVersion.setVisibility(View.VISIBLE);
 
 
+            OnClickListener onClickFullVersionBtn = new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    String appPackageName = getResources().getString(R.string.full_version_package);
+                    intent.setData(Uri.parse("market://details?id=" + appPackageName));
+                    startActivity(intent);
+                }
+            };
+
+            fullVersion.setOnClickListener(onClickFullVersionBtn);
+        }
 
 
-        loadEntries();
-        Log.d("Entries",""+ sPref.getInt("Entries",0));
+        Log.d("Game_lbl",""+ ((Game) getApplicationContext()).getEntries());
 
 
 
@@ -169,29 +183,4 @@ public class MainActivity extends Activity {
         startActivity(intent);
     }
 
-    @Override
-    protected void onDestroy() {
-        saveEntries();
-        Log.d("Entries_destroy", "" + sPref.getInt("Entries", 0));
-        super.onDestroy();
-    }
-
-    public void saveEntries() {
-        entries++;
-        sPref = getPreferences(MODE_PRIVATE);
-        SharedPreferences.Editor ed = sPref.edit();
-        ed.putInt("Entries", entries);
-        ed.commit();
-
-    }
-
-
-    public void loadEntries() {
-        sPref = getPreferences(MODE_PRIVATE);
-        entries = sPref.getInt("Entries",0);
-        if ( entries >= 2 ) {
-            fullVersionBtn.setVisibility(View.VISIBLE);
-        }
-
-    }
 }
