@@ -14,7 +14,7 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="25dp"
+            android:layout_height="71dp"
             android:weightSum="1"
             android:id="@+id/top_panel">
 
@@ -26,7 +26,9 @@
                 android:id="@+id/right_touches_txt"
                 android:gravity="left"
                 android:textSize="@dimen/text_size"
-                android:layout_gravity="center_vertical|left" />
+                android:layout_gravity="center_vertical|left"
+                android:paddingLeft="5dp"
+                android:paddingRight="3dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -69,8 +71,15 @@
                 android:id="@+id/touches"
                 android:textSize="@dimen/text_size"
                 android:gravity="right"
-                android:layout_gravity="center_vertical" />
+                android:layout_gravity="center_vertical"
+                android:paddingRight="5dp"
+                android:paddingLeft="3dp" />
         </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/text_color" />
 
         <com.adeco.finddifferences.GameView
             android:id="@+id/canvas"

@@ -58,11 +58,6 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
         //this.mWakeLock.acquire();
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        WindowManager wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
-        Display display = wm.getDefaultDisplay();
-        int width = display.getWidth();
-        int height = display.getHeight();
-        double scale = ((double)width)/height;
 
         stopWatch = new Stopwatch();
 
@@ -78,18 +73,6 @@ public class GameActivity extends Activity implements StatisticHandler, Differen
         right_touches.setTypeface(tf);
         timer.setTypeface(tf);
 
-
-       /* if (scale < 0.75)
-        {
-            LinearLayout topPanel = (LinearLayout) findViewById(R.id.top_panel);
-            ViewGroup.LayoutParams params = topPanel.getLayoutParams();
-            params.height = 150;
-            tries.setTextSize(23);
-            tries_txt.setTextSize(23);
-            right_touches.setTextSize(23);
-            right_touches_txt.setTextSize(23);
-            timer.setTextSize(23);
-        }*/
 
         popupController = new Popups(this, this, (Game) getApplicationContext(), getIntent());
 

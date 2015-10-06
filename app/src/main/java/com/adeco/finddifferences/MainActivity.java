@@ -116,6 +116,10 @@ public class MainActivity extends Activity {
                     }
                 });
 
+                vibro_cb.setChecked(((Game) getApplicationContext()).getSettings().Vibro);
+                music_cb.setChecked(((Game) getApplicationContext()).getSettings().Music);
+                sound_cb.setChecked(((Game) getApplicationContext()).getSettings().Sound);
+
                 WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
                 lp.copyFrom(alert.getWindow().getAttributes());
                 lp.width = WindowManager.LayoutParams.MATCH_PARENT;

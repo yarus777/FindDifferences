@@ -101,20 +101,27 @@ public class Game extends Application implements Drawable, Touchable, Destroyabl
         Display display = wm.getDefaultDisplay();
 
 
+        int d_height = (display.getHeight()-192)/2;
+        double d_scaleFactor = (double) d_height / imgHeight;
+        int d_width = (int) (d_scaleFactor * imgWidth);
+        img1 = Bitmap.createScaledBitmap(img1raw, d_width, d_height, false);
+        img2 = Bitmap.createScaledBitmap(img2raw, d_width, d_height, false);
+
         int width = display.getWidth();
-        double scaleFactor = (double) width / imgWidth;
-        int height = (int) (scaleFactor * imgHeight);
-        img1 = Bitmap.createScaledBitmap(img1raw, width, height, false);
-        img2 = Bitmap.createScaledBitmap(img2raw, width, height, false);
+        int new_width = (width-img1.getWidth())/2;
+        //double scaleFactor = (double) width / imgWidth;
+        //int height = (int) (scaleFactor * imgHeight);
+        //img1 = Bitmap.createScaledBitmap(img1raw, width, height, false);
+        //img2 = Bitmap.createScaledBitmap(img2raw, width, height, false);
 
 
         DifferencePoint[] diffs = level.getDiffs();
         DifferencePoint[] scaledDiffs = new DifferencePoint[diffs.length];
         for (int i = 0; i < diffs.length; i++) {
-            scaledDiffs[i] = diffs[i].scale(scaleFactor);
+            scaledDiffs[i] = diffs[i].scale(d_scaleFactor);
         }
 
-        Consts.applyScale(scaleFactor);
+        Consts.applyScale(d_scaleFactor);
 
         StateController stateController = new StateController(levelStorage);
         stateController.addHandler(popupController);
@@ -122,7 +129,7 @@ public class Game extends Application implements Drawable, Touchable, Destroyabl
         scoreController = new ScoreController(activity);
         levelStorage.setScoreController(scoreController);
 
-        pictureLayer = new PictureLayer(img1, img2, scaledDiffs, new StatisticHandler[]{statisticHandler, scoreController, stateController}, differenceHandlers);
+        pictureLayer = new PictureLayer(width, img1, img2, scaledDiffs, new StatisticHandler[]{statisticHandler, scoreController, stateController}, differenceHandlers);
         stateController.addHandler(levelStorage);
 
         stateController.addHandler(pictureLayer);

@@ -185,7 +185,7 @@ public class Popups implements PopupController {
 
         final Dialog alert = new Dialog(context);
         alert.setCanceledOnTouchOutside(false);
-        alert.setCancelable(false);
+        //alert.setCancelable(false);
         alert.requestWindowFeature(Window.FEATURE_NO_TITLE);
         alert.setContentView(R.layout.dialog_complete);
         alert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
